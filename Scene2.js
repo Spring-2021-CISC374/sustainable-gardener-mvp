@@ -11,8 +11,9 @@ class Scene2 extends Phaser.Scene {
   
   
     create() {
-    this.shovel1 = this.add.image(config.width/2 - 50, config.height/2, "shovel");
-    
+    this.shovel1 = this.add.sprite(config.width/2 - 50, config.height/2, "shovel");
+    this.shovel1.setInteractive();
+
       this.add.text(20, 20, "Sustainable Gardener", {
         font: "25px Courier",
         fill: "white",
@@ -24,24 +25,29 @@ class Scene2 extends Phaser.Scene {
           blur: 5,
           fill: true
         }
-
-        
       });
   
       this.shovel1.setScale(0.25);
       this.shovel1.setInteractive();
      
-    //   this.input.on('gameobjectdown', this.destroyTool, this);
+        
+       //add a listener to the scene, this will pass the object clicked to the function
+        this.input.on('gameobjectdown', this.onClicked.bind(this));
+    }
 
+    //pointer is the mouse or finger touch that triggered the event
+    onClicked(pointer, objectClicked) {
+        objectClicked.destroy();
+        this.add.text(config.width/2 - 50, config.height/2, "You picked up the shovel!", {
+            font: "10px Courier",
+            fill: "white",
+            align: "center",
+          });
     }
 
     update() {
         this.shovel1.angle += 1;
 
-        // destroyTool(pointer, gameObject){
-        //     gameObject.setTexture("explosion");
-        //     gameObject.play("explode");
-        // }
     }
   
   }
