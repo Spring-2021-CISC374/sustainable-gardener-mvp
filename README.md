@@ -8,5 +8,5 @@ CISC 374 Spring 21
 - Emily Oldham
 
 ## Jumpstarting Game Implementation: ##
-
+- Kate: Added player movement through up/down/left/right keys. Found a farmer spritesheet on OpenGameArt.org to use for now.
 
