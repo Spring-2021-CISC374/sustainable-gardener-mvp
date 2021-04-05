@@ -36,21 +36,21 @@ class Scene2 extends Phaser.Scene {
 
   movePlayer() {
     this.player.setVelocity(0);
-    if (this.cursorKeys.left.isDown) {
+    if (this.cursorKeys.left._justDown) {
       this.player.setVelocityX(-150);
-      this.player.play("player_anim_left");
+      this.player.play("player_anim_left", true);
     }
-    else if (this.cursorKeys.right.isDown) {
+    else if (this.cursorKeys.right._justDown) {
       this.player.setVelocityX(150);
-      this.player.play("player_anim_right");
+      this.player.play("player_anim_right", true);
     }
-    if (this.cursorKeys.up.isDown) {
+    else if (this.cursorKeys.up._justDown) {
       this.player.setVelocityY(-150);
-      this.player.play("player_anim_up");
+      this.player.play("player_anim_up", true);
     }
-    else if (this.cursorKeys.down.isDown) {
+    else if (this.cursorKeys.down._justDown) {
       this.player.setVelocityY(150);
-      this.player.play("player_anim_down");
+      this.player.play("player_anim_down", true);
     }
   }
 
