@@ -35,6 +35,22 @@ class Scene2 extends Phaser.Scene {
     this.shovel1.setInteractive();
     this.shovel1.setScale(0.25);
     this.shovel1.setInteractive();
+    
+    this.input.mouse.disableContextMenu();
+
+        this.input.on('pointerdown', function (pointer) {
+
+            if (pointer.rightButtonDown()) {
+
+                this.add.image(pointer.x, pointer.y, 'hose');
+                this.add.text(20, 20, "Right Button Clicked", { font: "25px Arial", fill: "black" });
+                
+            }
+            else {
+                this.add.image(pointer.x, pointer.y, 'shovel');
+            }
+    
+        }, this);
      
         
     //add a listener to the scene, this will pass the object clicked to the function
@@ -55,6 +71,7 @@ class Scene2 extends Phaser.Scene {
   update() {
     this.movePlayer();
     this.shovel1.angle += 1;
+    var pointer = this.input.activePointer;
   }
 
   movePlayer() {
@@ -79,3 +96,4 @@ class Scene2 extends Phaser.Scene {
 
 
 }
+

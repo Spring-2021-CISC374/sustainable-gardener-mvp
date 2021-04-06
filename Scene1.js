@@ -1,4 +1,5 @@
 class Scene1 extends Phaser.Scene {
+
     constructor(){
         super("bootGame");
     }
@@ -23,6 +24,9 @@ class Scene1 extends Phaser.Scene {
             frameWidth: 16,
             frameHeight: 18
         });
+       this.load.image("shovel", "assets/images/shovel.png");
+        this.load.image("background", "assets/images/background.jpg");
+        this.load.image("hose", "assets/images/hose2.png");
         
     }
 
@@ -55,4 +59,5 @@ class Scene1 extends Phaser.Scene {
             repeat: 0
         });
     }
+
 }
