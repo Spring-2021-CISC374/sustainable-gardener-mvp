@@ -28,6 +28,7 @@ class Scene2 extends Phaser.Scene {
 
     // player movement
     this.player.setInteractive();
+    this.player.setScale(3);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
     
@@ -77,19 +78,19 @@ class Scene2 extends Phaser.Scene {
   movePlayer() {
     this.player.setVelocity(0);
     if (this.cursorKeys.left._justDown) {
-      this.player.setVelocityX(-150);
+      this.player.setVelocityX(-175);
       this.player.play("player_anim_left", true);
     }
     else if (this.cursorKeys.right._justDown) {
-      this.player.setVelocityX(150);
+      this.player.setVelocityX(175);
       this.player.play("player_anim_right", true);
     }
     else if (this.cursorKeys.up._justDown) {
-      this.player.setVelocityY(-150);
+      this.player.setVelocityY(-175);
       this.player.play("player_anim_up", true);
     }
     else if (this.cursorKeys.down._justDown) {
-      this.player.setVelocityY(150);
+      this.player.setVelocityY(175);
       this.player.play("player_anim_down", true);
     }
   }
