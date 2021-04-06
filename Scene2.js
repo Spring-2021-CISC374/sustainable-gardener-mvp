@@ -1,14 +1,14 @@
 class Scene2 extends Phaser.Scene {
-  
+
   constructor() {
     super("playGame");
   }
 
   preload() {
-    
+
     this.player = this.physics.add.sprite(config.width / 10 - 50, config.height / 2, "playerImg");
     this.load.image("shovel", "assets/shovel.png");
-    
+
   }
 
 
@@ -31,29 +31,29 @@ class Scene2 extends Phaser.Scene {
     this.player.setScale(3);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
-    
-    this.shovel1 = this.add.sprite(config.width/2 - 50, config.height/2, "shovel");
+
+    this.shovel1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "shovel");
     this.shovel1.setInteractive();
     this.shovel1.setScale(0.25);
     this.shovel1.setInteractive();
-    
+
     this.input.mouse.disableContextMenu();
 
-        this.input.on('pointerdown', function (pointer) {
+    this.input.on('pointerdown', function (pointer) {
 
-            if (pointer.rightButtonDown()) {
+      if (pointer.rightButtonDown()) {
 
-                this.add.image(pointer.x, pointer.y, 'hose');
-                this.add.text(20, 20, "Right Button Clicked", { font: "25px Arial", fill: "black" });
-                
-            }
-            else {
-                this.add.image(pointer.x, pointer.y, 'shovel');
-            }
-    
-        }, this);
-     
-        
+        this.add.image(pointer.x, pointer.y, 'hose');
+        this.add.text(20, 20, "Right Button Clicked", { font: "25px Arial", fill: "black" });
+
+      }
+      else {
+        this.add.image(pointer.x, pointer.y, 'shovel');
+      }
+
+    }, this);
+
+
     //add a listener to the scene, this will pass the object clicked to the function
     this.input.on('gameobjectdown', this.onClicked.bind(this));
 
@@ -61,12 +61,12 @@ class Scene2 extends Phaser.Scene {
 
   //pointer is the mouse or finger touch that triggered the event
   onClicked(pointer, objectClicked) {
-      objectClicked.destroy();
-      this.add.text(config.width/2 - 50, config.height/2, "You picked up the shovel!", {
-          font: "10px Courier",
-          fill: "white",
-          align: "center",
-        });
+    objectClicked.destroy();
+    this.add.text(config.width / 2 - 50, config.height / 2, "You picked up the shovel!", {
+      font: "10px Courier",
+      fill: "white",
+      align: "center",
+    });
   }
 
   update() {
