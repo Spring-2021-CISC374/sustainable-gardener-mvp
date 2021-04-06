@@ -1,0 +1,30 @@
+PlantName,Scientific,Native?,Types ,Season,Bloom,Pollinators?,PollinatorType
+Giant Sunflower,Helianthus giganteus,Yes,Perennial ,Summer ,Summer ,yes,bees
+Wild Strawberry,Fragaria virginiana,Yes,Perennial ,Spring,Spring,yes,bees
+Black Raspberry,Rubus occidentalis,Yes,Shrub,All,Summer ,yes ,bees 
+American Wild Plum,Prunus Americana,Yes,Shrub,All,Spring,yes ,bees
+Tulip Tree,Liriodendron tulipifera,Yes,Tree,All,Spring,Yes,bees
+Red Maple,Acer rubrum,Yes,Tree,All,Spring,yes,bees
+Red Cedar,Juniperus virginiana,Yes,Tree,All,Winter,yes,Birds
+River Birch,Betula nigra,Yes,Tree,All,All,yes,Birds
+Butterfly Milkweed,Asclepias tuberosa,Yes,Perennial ,Summer ,Summer ,yes,Monarch Butterflys
+Daisies,Bellis perennis,Yes,Perennial ,Summer/Fall,Summer/Fall,yes,Monarch Butterflys
+Broom Sedge,Andropogon virginicus,Yes,Grass,Fall,Fall,No,No
+Fringed Gentian ,Gentianopsis,Yes,Annual ,Fall,Fall,No,No
+Purple Milkweed,Asclepias purpurascens,Yes,Perennial ,Summer,Summer,yes,Butterflys
+Skunk Cabbage ,Symplocarpus foetidus ,Yes,Perennial ,Winter,Winter,no,no
+Swamp Sunflower,Helianthus angustifolius ,Yes,Perennial ,Fall,Fall,No,No
+Winterberry Holly,Ilex verticillata,Yes,Shrub,All,Winter,No,No
+Smooth Sumac,Rhus glabra,Yes,Shrub,All,Winter,No,No
+Japanese maple,Acer palmatum,No,Tree,All,Summer,No,No
+Norway maple,Acer platanoides,No,Tree,All,Spring,No,No
+European sweetflag,Acorus calamus,No,Grass,Summer,Summer,No,No
+Tree of heaven,Ailanthus altissima,No,Tree,All,Summer,No,No
+Garlic mustard,Alliaria petiolata,No,Annual ,Summer,Summer,No,No
+Porcelain berry,Ampelopsis glandulosa,No,Perennial ,Summer/Fall,Fall,No,No
+Spotted knapweed,Centaurea stoebe subsp. micranthos,No,Perennial ,All,Summer,No,No
+Autumn olive,Elaeagnus umbellata,No,Shrub,All,Fall,No,No
+Weeping lovegrass,Eragrostis curvula,No,Grass,Summer,Summer,No,No
+Wintercreeper,Euonymus fortunei,No,Shrub,All,Spring,No,No
+Japanese knotweed,Fallopia japonica,No,Perennial ,Spring,Spring,No,No
+English ivy,Hedera helix,No,Perennial ,All,All,No,No
