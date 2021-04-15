@@ -51,13 +51,32 @@ class Scene2 extends Phaser.Scene {
             }
     
         }, this);
+    
+        const group = this.add.group({
+          key: 'hose',
+          frame: [ 0, 1, 2, 3, 4 ],
+          frameQuantity: 20
+      });
+
+      Phaser.Actions.GridAlign(group.getChildren(), {
+          width: 256,
+          height: 96,
+          cellWidth: 32,
+          cellHeight: 32,
+          x: config.width/2,
+          y: 100
+      });
      
-        
+    var g1 = this.add.grid(config.width / 2, config.height / 1.15, 1024, 128, 64, 64, 0xffffff, 0.5);
+    g1.setDepth(-1);
+            
     //add a listener to the scene, this will pass the object clicked to the function
 
     this.input.on('gameobjectdown', this.onClicked.bind(this));
 
   }
+
+  
 
   //pointer is the mouse or finger touch that triggered the event
   onClicked(pointer, objectClicked) {
