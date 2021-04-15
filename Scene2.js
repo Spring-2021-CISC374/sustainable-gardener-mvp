@@ -54,12 +54,14 @@ class Scene2 extends Phaser.Scene {
      
         
     //add a listener to the scene, this will pass the object clicked to the function
+
     this.input.on('gameobjectdown', this.onClicked.bind(this));
 
   }
 
   //pointer is the mouse or finger touch that triggered the event
   onClicked(pointer, objectClicked) {
+    app.inventoryArr.push(objectClicked);
       objectClicked.destroy();
       this.add.text(config.width/2 - 50, config.height/2, "You picked up the shovel!", {
           font: "10px Courier",

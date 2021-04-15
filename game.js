@@ -11,6 +11,10 @@ var config = {
       }
     },
     pixelArt: true,
-  }
+}
+  
+var app = {
+  inventoryArr: []
+}
   
   var game = new Phaser.Game(config);
