@@ -10,6 +10,7 @@ var config = {
       }
     },
     pixelArt: true,
+    tutorial: true
   }
   
   var game = new Phaser.Game(config);
