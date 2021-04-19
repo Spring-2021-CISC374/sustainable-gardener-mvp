@@ -51,6 +51,10 @@ class Scene1 extends Phaser.Scene {
         });
 
 
+        
+       this.load.image("shovel", "assets/images/shovel.png");
+        this.load.image("background", "assets/images/background.jpg");
+        this.load.image("hose", "assets/images/hose2.png");
     }
 
     create() {
