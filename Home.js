@@ -34,9 +34,10 @@ class Home extends Phaser.Scene {
     this.paper = this.add.image(1275, 200, "scroll");
     this.paper.setScale(0.25);
     this.add.text(1200,100, "Task List:",{fill:"#000000", fontSize:"25px"});
-    this.add.text(1200,150, "Use arrow keys to move player",{fill:"#000000", fontSize:"10px"});
-    this.add.text(1200,175, "Click on the shovel to pick it up",{fill:"#000000", fontSize:"9px"});
-    this.add.text(1200,200, "Right click to put down or \n drop object",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,150, "- Use arrow keys to move player",{fill:"#000000", fontSize:"10px"});
+    this.add.text(1200,175, "- Click on the shovel to pick it up",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,200, "- Right click to put down or \n drop object",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,230, "- Now walk down the road to \n get to the town from your home",{fill:"#000000", fontSize:"9px"});
 
     // checkmark for player movement
     this.checkmark1 = this.add.image(1190, 150, "checkmark").setVisible(false);
@@ -49,6 +50,10 @@ class Home extends Phaser.Scene {
     // checkmark for putting down hose
     this.checkmark3 = this.add.image(1190, 200, "checkmark").setVisible(false);
     this.checkmark3.setScale(.025);    
+
+    // checkmark for going to the town
+    this.checkmark4 = this.add.image(1190, 230, "checkmark").setVisible(false);
+    this.checkmark4.setScale(.025);       
     
 
     // player movement
@@ -104,6 +109,9 @@ class Home extends Phaser.Scene {
 
     // console.log(this.player.x)
 
+    if(this.player.y >= 780 && this.player.x >= 635 && this.player.x <= 689){
+      this.checkmark4.setVisible(true);
+    }
     if(this.player.y >= 783 && this.player.x >= 635 && this.player.x <= 689){
       this.scene.start('Town');
       console.log('bottom');
