@@ -18,6 +18,9 @@ class Scene1 extends Phaser.Scene {
         this.load.image("english_ivy_1", "assets/english_ivy_1.png");
         this.load.image("english_ivy_2", "assets/english_ivy_2.png");
         this.load.image("english_ivy_3", "assets/english_ivy_3.png");
+        this.load.image("sunflower_1", "assets/Sunflower_1.png");
+        this.load.image("sunflower_2", "assets/Sunflower_2.png");
+        this.load.image("sunflower_3", "assets/Sunflower_3.png");
 
         //player sprites
         this.load.spritesheet("player_left", "assets/player_left.png", {

@@ -15,7 +15,7 @@ class Plant{
 
     water(){
         console.log('watering...')
-        setTimeout(5000, () => this.changeStage());
+        this.changeStage();
     }
 
     changeStage(){
