@@ -5,10 +5,9 @@ class Home extends Phaser.Scene {
   }
 
   preload() {
-    
     this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "homeImg");
     this.background.scale = 0.75;
-    this.player = this.physics.add.sprite(650, 780, "playerImg");
+    this.player = this.physics.add.sprite(650, 450, "playerImg");
     console.log(this.player.x)
     this.load.image("shovel", "assets/shovel.png");
     this.load.image("scroll", "assets/scroll.png");
@@ -34,10 +33,10 @@ class Home extends Phaser.Scene {
     this.paper = this.add.image(1275, 200, "scroll");
     this.paper.setScale(0.25);
     this.add.text(1200,100, "Task List:",{fill:"#000000", fontSize:"25px"});
-    this.add.text(1200,150, "- Use arrow keys to move player",{fill:"#000000", fontSize:"10px"});
-    this.add.text(1200,175, "- Click on the shovel to pick it up",{fill:"#000000", fontSize:"9px"});
-    this.add.text(1200,200, "- Right click to put down or \n drop object",{fill:"#000000", fontSize:"9px"});
-    this.add.text(1200,230, "- Now walk down the road to \n get to the town from your home",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,150, "- Use arrow keys to move player",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,175, "- Click on the shovel to pick \n it up",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,200, "- Right click to put down or \n drop an object",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,230, "- Now continue walking down the \n  road to get to the town \n  from your home",{fill:"#000000", fontSize:"9px"});
 
     // checkmark for player movement
     this.checkmark1 = this.add.image(1190, 150, "checkmark").setVisible(false);
@@ -109,7 +108,7 @@ class Home extends Phaser.Scene {
 
     // console.log(this.player.x)
 
-    if(this.player.y >= 780 && this.player.x >= 635 && this.player.x <= 689){
+    if(this.player.y >= 760 && this.player.x >= 635 && this.player.x <= 689){
       this.checkmark4.setVisible(true);
     }
     if(this.player.y >= 783 && this.player.x >= 635 && this.player.x <= 689){
