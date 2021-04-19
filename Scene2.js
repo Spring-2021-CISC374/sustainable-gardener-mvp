@@ -35,43 +35,17 @@ class Scene2 extends Phaser.Scene {
     this.shovel1.setInteractive();
     this.shovel1.setScale(0.25);
     this.shovel1.setInteractive();
-    
-    this.input.mouse.disableContextMenu();
 
-        this.input.on('pointerdown', function (pointer) {
-
-            if (pointer.rightButtonDown()) {
-
-                this.add.image(pointer.x, pointer.y, 'hose');
-                this.add.text(20, 20, "Right Button Clicked", { font: "25px Arial", fill: "black" });
-                
-            }
-            else {
-                this.add.image(pointer.x, pointer.y, 'shovel');
-            }
-    
-        }, this);
-    
-        const group = this.add.group({
-          key: 'hose',
-          frame: [ 0, 1, 2, 3, 4 ],
-          frameQuantity: 20
-      });
-
-      Phaser.Actions.GridAlign(group.getChildren(), {
-          width: 256,
-          height: 96,
-          cellWidth: 32,
-          cellHeight: 32,
-          x: config.width/2,
-          y: 100
-      });
+    this.hose1 = this.add.sprite(config.width/2 + 50, config.height/2, "hose");
+    this.hose1.setInteractive();
+    this.hose1.setScale(1);
+    this.hose1.setInteractive();
      
-    var g1 = this.add.grid(config.width / 2, config.height / 1.15, 1024, 128, 64, 64, 0xffffff, 0.5);
+    var g1 = this.add.grid(config.width / 2, config.height / 1.15, 1024, 64, 64, 64, 0xffffff, 0.5);
     g1.setDepth(-1);
+
             
     //add a listener to the scene, this will pass the object clicked to the function
-
     this.input.on('gameobjectdown', this.onClicked.bind(this));
 
   }
@@ -80,7 +54,7 @@ class Scene2 extends Phaser.Scene {
 
   //pointer is the mouse or finger touch that triggered the event
   onClicked(pointer, objectClicked) {
-    app.inventoryArr.push(objectClicked);
+    this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.add.text(config.width/2 - 50, config.height/2, "You picked up the shovel!", {
           font: "10px Courier",
@@ -115,6 +89,28 @@ class Scene2 extends Phaser.Scene {
     }
   }
 
+  showInventory() {
+    var IKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+    if (IKey.isDown) {
+      console.log("I!!")
+    }
+  }
 
-}
+  addItemtoInventory(object) {
+    app.inventoryArr.push(object);
+    var container = this.add.container(config.width / 2, config.height / 1.15);
+    var x = 0;
+    for (var i = 0; i < app.inventoryArr.length; i++){
+      console.log(app.inventoryArr[i]);
+      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
+      sprite.setScale(0.5);
+      container.add(sprite);
+      x = x + 128
+    }
+  }
+
+ 
+  }
+
+
 
