@@ -1,9 +1,8 @@
 
 var config = {
-    width: 1420,
-    height: 665,
-    backgroundColor: 0x0b571c,
-    scene: [Scene1, Scene2],
+    width: 1917,
+    height: 1077,
+    scene: [Scene1, Home, Town],
     physics: {
       default: "arcade",
       arcade:{

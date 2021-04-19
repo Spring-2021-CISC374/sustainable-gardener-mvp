@@ -1,18 +1,22 @@
-class Scene2 extends Phaser.Scene {
+class Home extends Phaser.Scene {
 
   constructor() {
-    super("playGame");
+    super("Home");
   }
 
   preload() {
-
-    this.player = this.physics.add.sprite(config.width / 10 - 50, config.height / 2, "playerImg");
+    
+    this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "homeImg");
+    this.background.scale = 0.75;
+    this.player = this.physics.add.sprite(650, 780, "playerImg");
+    console.log(this.player.x)
     this.load.image("shovel", "assets/shovel.png");
 
   }
 
 
   create() {
+    
     this.add.text(20, 20, "Sustainable Gardener", {
       font: "25px Courier",
       fill: "white",
@@ -33,6 +37,7 @@ class Scene2 extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
 
     this.shovel1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "shovel");
+    console.log(this.shovel1.x)
     this.shovel1.setInteractive();
     this.shovel1.setScale(0.25);
     this.shovel1.setInteractive();
@@ -44,7 +49,7 @@ class Scene2 extends Phaser.Scene {
       if (pointer.rightButtonDown()) {
 
         this.add.image(pointer.x, pointer.y, 'hose');
-        this.add.text(20, 20, "Right Button Clicked", { font: "25px Arial", fill: "black" });
+        // this.add.text(20, 20, "Right Button Clicked", { font: "25px Arial", fill: "black" });
 
       }
       else {
@@ -70,9 +75,18 @@ class Scene2 extends Phaser.Scene {
   }
 
   update() {
-    this.movePlayer();
     this.shovel1.angle += 1;
     var pointer = this.input.activePointer;
+
+    // console.log(this.player.x)
+
+    if(this.player.y >= 783 && this.player.x >= 635 && this.player.x <= 689){
+      this.scene.start('Town');
+      console.log('bottom');
+    }
+    else{
+      this.movePlayer();
+    }
   }
 
   movePlayer() {
