@@ -131,7 +131,7 @@ class Home extends Phaser.Scene {
 
     }, this);
 
-    var g1 = this.add.grid(config.width / 2.5, config.height / 1.15, 1024, 64, 64, 64, 0xffffff, 0.5);
+    var g1 = this.add.grid(config.width / 2.82, config.height / 1.15, 1024, 64, 64, 64, 0xffffff, 0.5);
     g1.setDepth(1);
 
 
