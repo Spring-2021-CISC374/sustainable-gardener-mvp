@@ -7,7 +7,7 @@ class Home extends Phaser.Scene {
   preload() {
     this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "homeImg");
     this.background.scale = 0.75;
-    this.player = this.physics.add.sprite(650, 450, "playerImg");
+    this.player = this.physics.add.sprite(650, 450, "player");
     this.load.image("shovel", "assets/shovel.png");
     this.load.image("scroll", "assets/scroll.png");
     this.load.image("checkmark", "assets/checkmark.png");
@@ -28,9 +28,35 @@ class Home extends Phaser.Scene {
       }
     });
 
-    //plant 
-    this.testPlantIvy = new Plant("english_ivy", 200, 200);
-    this.testPlantIvyImg = this.add.image(this.testPlantIvy.x, this.testPlantIvy.y, this.testPlantIvy.img);
+    //english ivy plants 
+    this.ivy = new Plant("english_ivy", 200, 500);
+    this.ivyImg = this.add.image(this.ivy.x, this.ivy.y, this.ivy.img);
+    this.ivy1 = new Plant("english_ivy", 275, 500);
+    this.ivyImg1 = this.add.image(this.ivy1.x, this.ivy1.y, this.ivy1.img);
+    this.ivy2 = new Plant("english_ivy", 350, 500);
+    this.ivyImg2 = this.add.image(this.ivy2.x, this.ivy2.y, this.ivy2.img);
+    this.ivy3 = new Plant("english_ivy", 425, 500);
+    this.ivyImg3 = this.add.image(this.ivy3.x, this.ivy3.y, this.ivy3.img);
+    this.ivy4 = new Plant("english_ivy", 500, 500);
+    this.ivyImg4 = this.add.image(this.ivy4.x, this.ivy4.y, this.ivy4.img);
+
+    //sunflower plants 
+    this.sunflower = new Plant("sunflower", 200, 575);
+    this.sunflowerImg = this.add.image(this.sunflower.x, this.sunflower.y, this.sunflower.img);
+    this.sunflower1 = new Plant("sunflower", 275, 575);
+    this.sunflowerImg1 = this.add.image(this.sunflower1.x, this.sunflower1.y, this.sunflower1.img);
+    this.sunflower2 = new Plant("sunflower", 350, 575);
+    this.sunflowerImg2 = this.add.image(this.sunflower2.x, this.sunflower2.y, this.sunflower2.img);
+    this.sunflower3 = new Plant("sunflower", 425, 575);
+    this.sunflowerImg3 = this.add.image(this.sunflower3.x, this.sunflower3.y, this.sunflower3.img);
+    this.sunflower4 = new Plant("sunflower", 500, 575);
+    this.sunflowerImg4 = this.add.image(this.sunflower4.x, this.sunflower4.y, this.sunflower4.img);
+
+    this.plants = [[this.ivy, this.ivyImg], [this.ivy1, this.ivyImg1], [this.ivy2, this.ivyImg2], 
+                  [this.ivy3, this.ivyImg3], [this.ivy4, this.ivyImg4], [this.sunflower, this.sunflowerImg],
+                  [this.sunflower1, this.sunflowerImg1], [this.sunflower2, this.sunflowerImg2],
+                  [this.sunflower3, this.sunflowerImg3], [this.sunflower4, this.sunflowerImg4]];
+
 
     // task list 
     this.paper = this.add.image(1275, 200, "scroll");
@@ -40,6 +66,7 @@ class Home extends Phaser.Scene {
     this.add.text(1200,175, "- Click on the shovel to pick \n it up",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,200, "- Right click to put down or \n drop an object",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,230, "- Now continue walking down the \n  road to get to the town \n  from your home",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,270, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
 
     // checkmark for player movement
     this.checkmark1 = this.add.image(1190, 150, "checkmark").setVisible(false);
@@ -56,6 +83,10 @@ class Home extends Phaser.Scene {
     // checkmark for going to the town
     this.checkmark4 = this.add.image(1190, 230, "checkmark").setVisible(false);
     this.checkmark4.setScale(.025);    
+
+    // checkmark for going to the town
+    this.checkmark5 = this.add.image(1190, 260, "checkmark").setVisible(false);
+    this.checkmark5.setScale(.025);   
     
 
     // player movement
@@ -84,9 +115,12 @@ class Home extends Phaser.Scene {
         // this.add.text(20, 20, "Right Button Clicked", { font: "25px Arial", fill: "black" });
       }
       else if(pointer.leftButtonDown()){
-        if((Math.abs(pointer.x - this.testPlantIvy.x) < 40) && (Math.abs(pointer.y - this.testPlantIvy.y) < 40)
-          && (Math.abs(this.player.x - this.testPlantIvy.x) < 80) && (Math.abs(this.player.y - this.testPlantIvy.y) < 80)){
-            this.testPlantIvy.water();
+        for(var i = 0; i < this.plants.length; i ++){
+          if((Math.abs(pointer.x - this.plants[i][0].x) < 20) && (Math.abs(pointer.y - this.plants[i][0].y) < 20)
+          && (Math.abs(this.player.x - this.plants[i][0].x) < 70) && (Math.abs(this.player.y - this.plants[i][0].y) < 70)){
+              this.plants[i][0].water();
+              this.checkmark5.setVisible(true);
+          }
         }
         // else{
         //   this.shovelImg = this.add.image(pointer.x, pointer.y, 'shovel');
@@ -108,8 +142,10 @@ class Home extends Phaser.Scene {
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
     this.addItemtoInventory(objectClicked);
-    objectClicked.destroy();
-    this.checkmark2.setVisible(true);
+    if(objectClicked !== this.player){
+      objectClicked.destroy();
+      this.checkmark2.setVisible(true);
+    }
   }
 
   update() {
@@ -127,9 +163,10 @@ class Home extends Phaser.Scene {
       config.tutorial = false;
     }
 
-    //update plant image after its been watered
-    this.testPlantIvyImg = this.add.image(this.testPlantIvy.x, this.testPlantIvy.y, this.testPlantIvy.img);
-    this.testPlantIvyImg.setScale(2);
+    for(var i = 0; i < this.plants.length; i ++){
+      this.plants[i][1] = this.add.image(this.plants[i][0].x, this.plants[i][0].y, this.plants[i][0].img);
+      this.plants[i][1].setScale(2);
+    }
   }
 
   movePlayer() {
