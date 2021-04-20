@@ -69,6 +69,11 @@ class Home extends Phaser.Scene {
     this.shovel1.setScale(0.25);
     this.shovel1.setInteractive();
 
+    this.shovel2 = this.add.sprite(config.width / 2 + 50, config.height / 2, "shovel");
+    this.shovel2.setInteractive();
+    this.shovel2.setScale(0.25);
+    this.shovel2.setInteractive();
+
     this.input.mouse.disableContextMenu();
 
     this.input.on('pointerdown', function (pointer) {
@@ -92,6 +97,9 @@ class Home extends Phaser.Scene {
 
     }, this);
 
+    var g1 = this.add.grid(config.width / 2.5, config.height / 1.15, 1024, 64, 64, 64, 0xffffff, 0.5);
+    g1.setDepth(1);
+
 
     //add a listener to the scene, this will pass the object clicked to the function
     this.input.on('gameobjectdown', this.onClicked.bind(this));
@@ -99,6 +107,7 @@ class Home extends Phaser.Scene {
 
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
+    this.addItemtoInventory(objectClicked);
     objectClicked.destroy();
     this.checkmark2.setVisible(true);
   }
@@ -143,6 +152,21 @@ class Home extends Phaser.Scene {
     }
     if(this.player.velocityX !== 0 || this.player.velocityY !== 0){
       this.checkmark1.setVisible(true);
+    }
+  }
+
+  addItemtoInventory(object) {
+
+    app.inventoryArr.push(object);
+    var container = this.add.container(config.width / 10, config.height / 1.15);
+    container.setDepth(1);
+    var x = 0;
+    for (var i = 0; i < app.inventoryArr.length; i++){
+      console.log(app.inventoryArr[i]);
+      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
+      sprite.setScale(0.2);
+      container.add(sprite);
+      x = x + 64
     }
   }
 
