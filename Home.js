@@ -141,8 +141,8 @@ class Home extends Phaser.Scene {
 
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
-    this.addItemtoInventory(objectClicked);
-    if(objectClicked !== this.player){
+    if(objectClicked !== this.player && objectClicked.img === undefined){
+      this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.checkmark2.setVisible(true);
     }
