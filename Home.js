@@ -65,8 +65,9 @@ class Home extends Phaser.Scene {
     this.add.text(1200,150, "- Use arrow keys to move player",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,175, "- Click on the shovel to pick \n it up",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,200, "- Right click to put down or \n drop an object",{fill:"#000000", fontSize:"9px"});
-    this.add.text(1200,230, "- Now continue walking down the \n  road to get to the town \n  from your home",{fill:"#000000", fontSize:"9px"});
-    this.add.text(1200,270, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,230, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200,270, "- Now continue walking down the \n  road to get to the town \n  from your home",{fill:"#000000", fontSize:"9px"});
+    
 
     // checkmark for player movement
     this.checkmark1 = this.add.image(1190, 150, "checkmark").setVisible(false);
@@ -81,11 +82,11 @@ class Home extends Phaser.Scene {
     this.checkmark3.setScale(.025);    
 
     // checkmark for going to the town
-    this.checkmark4 = this.add.image(1190, 230, "checkmark").setVisible(false);
+    this.checkmark4 = this.add.image(1190, 270, "checkmark").setVisible(false);
     this.checkmark4.setScale(.025);    
 
-    // checkmark for going to the town
-    this.checkmark5 = this.add.image(1190, 260, "checkmark").setVisible(false);
+    // checkmark for gardening on home page
+    this.checkmark5 = this.add.image(1190, 230, "checkmark").setVisible(false);
     this.checkmark5.setScale(.025);   
     
 
