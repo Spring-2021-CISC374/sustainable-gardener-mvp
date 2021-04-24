@@ -1,6 +1,14 @@
 # Sustainable Gardener
 CISC 374 Spring 21
 
+## Installation
+- Clone the repository 
+- Open up MAMP 
+- Go to Preferences -> Server -> Choose
+- Choose the location to where repository is located locally
+- Start the server
+- On Google Chrome, navigate to http://localhost:8888/index.html
+
 ## Team: ##
 - Kate Bagshaw
 - Adheena Chacko
