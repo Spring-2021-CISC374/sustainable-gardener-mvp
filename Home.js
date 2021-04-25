@@ -11,9 +11,11 @@ class Home extends Phaser.Scene {
     this.load.image("shovel", "assets/shovel.png");
     this.load.image("scroll", "assets/scroll.png");
     this.load.image("checkmark", "assets/checkmark.png");
+    
   }
 
   create() {
+
     
     this.add.text(20, 20, "Sustainable Gardener", {
       font: "25px Courier",
@@ -95,6 +97,7 @@ class Home extends Phaser.Scene {
     this.player.setScale(3);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
+    this.player.setDepth(2);
 
     this.shovel1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "shovel");
     this.shovel1.setInteractive();
@@ -135,6 +138,11 @@ class Home extends Phaser.Scene {
     var g1 = this.add.grid(config.width / 2.82, config.height / 1.15, 1024, 64, 64, 64, 0xffffff, 0.5);
     g1.setDepth(1);
 
+  
+
+    this.container = this.add.container(config.width / 10, config.height / 1.15);
+    this.container.setDepth(2);
+
 
     //add a listener to the scene, this will pass the object clicked to the function
     this.input.on('gameobjectdown', this.onClicked.bind(this));
@@ -146,6 +154,7 @@ class Home extends Phaser.Scene {
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.checkmark2.setVisible(true);
+
     }
   }
 
@@ -153,6 +162,7 @@ class Home extends Phaser.Scene {
     this.shovel1.angle += 1;
     var pointer = this.input.activePointer;
     this.movePlayer();
+    this.showInventory();
 
     if(this.player.y >= 760 && this.player.x >= 635 && this.player.x <= 689){
       this.checkmark4.setVisible(true);
@@ -193,17 +203,32 @@ class Home extends Phaser.Scene {
     }
   }
 
-  addItemtoInventory(object) {
+  showInventory() {
+    var i = this.input.keyboard.addKey('i');
+    var o = this.input.keyboard.addKey("o");
+    
 
+   
+    if (i.isDown && this.container.visible==true) {
+      this.container.setVisible(false);
+    }
+    
+    if (o.isDown && this.container.visible==false) {
+      this.container.setVisible(true);
+    } 
+
+  }
+
+  addItemtoInventory(object) {
+    
     app.inventoryArr.push(object);
-    var container = this.add.container(config.width / 10, config.height / 1.15);
-    container.setDepth(1);
+
     var x = 0;
     for (var i = 0; i < app.inventoryArr.length; i++){
       console.log(app.inventoryArr[i]);
       var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
       sprite.setScale(0.2);
-      container.add(sprite);
+      this.container.add(sprite);
       x = x + 64
     }
   }
