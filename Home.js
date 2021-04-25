@@ -103,11 +103,17 @@ class Home extends Phaser.Scene {
     this.shovel1.setInteractive();
     this.shovel1.setScale(0.25);
     this.shovel1.setInteractive();
+    this.shovel1.alpha = 1;
 
     this.shovel2 = this.add.sprite(config.width / 2 + 50, config.height / 2, "shovel");
     this.shovel2.setInteractive();
     this.shovel2.setScale(0.25);
     this.shovel2.setInteractive();
+
+    this.highlightItem(this.shovel1);
+    this.highlightItem(this.shovel2);
+
+   
 
     this.input.mouse.disableContextMenu();
 
@@ -142,6 +148,8 @@ class Home extends Phaser.Scene {
 
     this.container = this.add.container(config.width / 10, config.height / 1.15);
     this.container.setDepth(2);
+    console.log(this.container);
+
 
 
     //add a listener to the scene, this will pass the object clicked to the function
@@ -207,8 +215,6 @@ class Home extends Phaser.Scene {
     var i = this.input.keyboard.addKey('i');
     var o = this.input.keyboard.addKey("o");
     
-
-   
     if (i.isDown && this.container.visible==true) {
       this.container.setVisible(false);
     }
@@ -217,6 +223,16 @@ class Home extends Phaser.Scene {
       this.container.setVisible(true);
     } 
 
+  }
+
+  highlightItem(item) {
+    item.on('pointerover', () => {
+      item.alpha = 0.5;
+    })
+
+    item.on('pointerout', () => {
+      item.alpha = 1;
+    })
   }
 
   addItemtoInventory(object) {
