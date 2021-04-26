@@ -138,6 +138,12 @@ class Home extends Phaser.Scene {
 
     //add a listener to the scene, this will pass the object clicked to the function
     this.input.on('gameobjectdown', this.onClicked.bind(this));
+    this.cursorKeys = this.input.keyboard.addKeys({
+        up: Phaser.Input.Keyboard.KeyCodes.W,
+        down: Phaser.Input.Keyboard.KeyCodes.S,
+        left: Phaser.Input.Keyboard.KeyCodes.A,
+        right: Phaser.Input.Keyboard.KeyCodes.D
+    });
   }
 
   //pointer is the mouse that triggered the event
