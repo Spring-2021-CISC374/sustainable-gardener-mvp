@@ -16,5 +16,7 @@ var config = {
 var app = {
   inventoryArr: []
 }
-  
+
+
+
   var game = new Phaser.Game(config);
