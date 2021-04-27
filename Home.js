@@ -150,6 +150,8 @@ class Home extends Phaser.Scene {
     this.container.setDepth(2);
     console.log(this.container);
 
+    this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+
 
 
     //add a listener to the scene, this will pass the object clicked to the function
@@ -218,15 +220,11 @@ class Home extends Phaser.Scene {
   }
 
   showInventory() {
-    var i = this.input.keyboard.addKey('i');
+    
     var o = this.input.keyboard.addKey("o");
     
-    if (i.isDown && this.container.visible==true) {
-      this.container.setVisible(false);
-    }
-    
-    if (o.isDown && this.container.visible==false) {
-      this.container.setVisible(true);
+    if (Phaser.Input.Keyboard.JustDown(this.i)) {
+      this.container.setVisible(!this.container.visible);
     } 
 
   }
