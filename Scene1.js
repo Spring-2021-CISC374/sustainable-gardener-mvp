@@ -98,26 +98,26 @@ class Scene1 extends Phaser.Scene {
         //townsperson1 animation
         this.anims.create({
             key: "t1_anim_left",
-            frames: this.anims.generateFrameNumbers("t1_left"),
-            frameRate: 20,
+            frames: this.anims.generateFrameNames("t1_left", {start: 1}),
+            frameRate: 10,
             repeat: 0
         });
         this.anims.create({
             key: "t1_anim_right",
-            frames: this.anims.generateFrameNumbers("t1_right"),
-            frameRate: 20,
+            frames: this.anims.generateFrameNames("t1_right", {start: 1}),
+            frameRate: 10,
             repeat: 0
         });
         this.anims.create({
             key: "t1_anim_up",
-            frames: this.anims.generateFrameNumbers("t1_up"),
-            frameRate: 20,
+            frames: this.anims.generateFrameNames("t1_up", {start: 1}),
+            frameRate: 10,
             repeat: 0
         });
         this.anims.create({
             key: "t1_anim_down",
-            frames: this.anims.generateFrameNumbers("t1_down"),
-            frameRate: 20,
+            frames: this.anims.generateFrameNames("t1_down", {start: 1}),
+            frameRate: 10,
             repeat: 0
         });
     }

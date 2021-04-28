@@ -13,10 +13,11 @@ class Plant{
         this.y = y;
     }
 
-    water(){
-        console.log('watering...')
-        setTimeout(50000, this.changeStage())
-        //this.changeStage();
+    water(plant){
+        setTimeout(function(){
+            console.log('before')
+            plant.changeStage();
+        }, 5000)
     }
 
     changeStage(){
