@@ -5,7 +5,7 @@ var config = {
     scene: [Scene1, Home, Town],
     physics: {
       default: "arcade",
-      arcade:{
+      arcade: {
           debug: false
       }
     },
