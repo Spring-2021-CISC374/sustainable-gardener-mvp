@@ -72,26 +72,26 @@ class Scene1 extends Phaser.Scene {
         //player animation
         this.anims.create({
             key: "player_anim_left",
-            frames: this.anims.generateFrameNumbers("player_left"),
-            frameRate: 20,
+            frames: this.anims.generateFrameNames('player_left', {start: 1}),
+            frameRate: 10,
             repeat: 0
         });
         this.anims.create({
             key: "player_anim_right",
-            frames: this.anims.generateFrameNumbers("player_right"),
-            frameRate: 20,
+            frames: this.anims.generateFrameNames('player_right', {start: 1}),
+            frameRate: 10,
             repeat: 0
         });
         this.anims.create({
             key: "player_anim_up",
-            frames: this.anims.generateFrameNumbers("player_up"),
-            frameRate: 20,
+            frames: this.anims.generateFrameNames('player_up', {start: 1}),
+            frameRate: 10,
             repeat: 0
         });
         this.anims.create({
             key: "player_anim_down",
-            frames: this.anims.generateFrameNumbers("player_down"),
-            frameRate: 20,
+            frames: this.anims.generateFrameNames('player_down', {start: 1}),
+            frameRate: 10,
             repeat: 0
         });
 
