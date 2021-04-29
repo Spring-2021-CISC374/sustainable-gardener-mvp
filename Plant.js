@@ -14,10 +14,14 @@ class Plant{
     }
 
     water(plant){
-        setTimeout(function(){
-            console.log('before')
+        if(plant.stage === -1){
             plant.changeStage();
-        }, 5000)
+        }
+        else{
+            setTimeout(function(){
+                plant.changeStage();
+            }, 5000);
+        }
     }
 
     changeStage(){
