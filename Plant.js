@@ -15,17 +15,19 @@ class Plant{
         this.growing = false;
     }
 
-    water(plant){
+    water(plant){ // returns true if the plant is being 'harvested' and needs to be added to inventory
         if(plant.stage === -1 && plant.growing === false){
             this.growing = true;
             plant.changeStage();
         }
         else if(plant.stage === 3 && plant.growing === false){
+            // or add plant to inventory here? maybe return plant object/img to add to inventory?
             plant.changeStage();
+            return true;
         }
         else if(plant.growing === false){
             this.growing = true;
-            plant.img = plant.img + "_watered"
+            plant.img = plant.img + "_watered";
             setTimeout(function(){
                 plant.changeStage();
             }, 5000);
@@ -51,6 +53,7 @@ class Plant{
             this.img = this.name+"_3";
         }
         else if(this.stage === 3){ //imgName_3 -> dirt stage (harvesting)
+            // add plant to inventory here
             this.stage = -1;
             this.img = "dirt";
         }

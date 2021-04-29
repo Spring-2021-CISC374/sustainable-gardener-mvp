@@ -195,8 +195,11 @@ class Home extends Phaser.Scene {
         for(var i = 0; i < this.plants.length; i ++){
           if((Math.abs(pointer.x - this.plants[i][0].x) < 20) && (Math.abs(pointer.y - this.plants[i][0].y) < 20)
           && (Math.abs(this.player.x - this.plants[i][0].x) < 70) && (Math.abs(this.player.y - this.plants[i][0].y) < 70)){
-              this.plants[i][0].water(this.plants[i][0]);
+              var add = this.plants[i][0].water(this.plants[i][0]);
               this.checkmark5.setVisible(true);
+              if(add){
+                this.addItemtoInventory(this.plants[i])
+              }
           }
         }
         // else{
@@ -305,15 +308,24 @@ class Home extends Phaser.Scene {
 
   addItemtoInventory(object) {
     
-    app.inventoryArr.push(object);
+    var plantobj = false;
+    if(object[1] !== undefined){
+      plantobj = true;
+      console.log('here is a plant!', object)
+      app.inventoryArr.push(object[1]);
+    }
+    else{
+      plantobj = false;
+      app.inventoryArr.push(object)
+    }
 
-    var x = 0;
+    var x = 10;
     for (var i = 0; i < app.inventoryArr.length; i++){
       console.log(app.inventoryArr[i]);
-      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
-      sprite.setScale(0.2);
+      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+      // sprite.setScale(0.2);
       this.container.add(sprite);
-      x = x + 64
+      x = x + 64;
     }
   }
 
