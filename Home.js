@@ -198,7 +198,7 @@ class Home extends Phaser.Scene {
               var add = this.plants[i][0].water(this.plants[i][0]);
               this.checkmark5.setVisible(true);
               if(add){
-                this.addItemtoInventory(this.plants[i])
+                this.addItemtoInventory(this.plants[i]);
               }
           }
         }
@@ -309,9 +309,8 @@ class Home extends Phaser.Scene {
   addItemtoInventory(object) {
     
     var plantobj = false;
-    if(object[1] !== undefined){
+    if(object[1] !== undefined){ 
       plantobj = true;
-      console.log('here is a plant!', object)
       app.inventoryArr.push(object[1]);
     }
     else{
@@ -323,7 +322,6 @@ class Home extends Phaser.Scene {
     for (var i = 0; i < app.inventoryArr.length; i++){
       console.log(app.inventoryArr[i]);
       var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
-      // sprite.setScale(0.2);
       this.container.add(sprite);
       x = x + 64;
     }

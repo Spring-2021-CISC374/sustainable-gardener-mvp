@@ -23,12 +23,14 @@ class Scene1 extends Phaser.Scene {
         this.load.image("english_ivy_2_watered", "assets/english_ivy_2_watered.png");
         this.load.image("english_ivy_3", "assets/english_ivy_3.png");
         this.load.image("english_ivy_3_inv", "assets/english_ivy_3_inv.png");
+        this.load.image("english_ivy_seeds", "assets/english_ivy_seeds.png")
         this.load.image("sunflower_1", "assets/Sunflower_1.png");
         this.load.image("sunflower_1_watered", "assets/Sunflower_1_watered.png");
         this.load.image("sunflower_2", "assets/Sunflower_2.png");
         this.load.image("sunflower_2_watered", "assets/Sunflower_2_watered.png");
         this.load.image("sunflower_3", "assets/Sunflower_3.png");
         this.load.image("sunflower_3_inv", "assets/Sunflower_3_inv.png");
+        this.load.image("sunflower_seeds", "assets/sunflower_seeds.png");
 
         //player sprites
         this.load.spritesheet("player_left", "assets/player_left.png", {

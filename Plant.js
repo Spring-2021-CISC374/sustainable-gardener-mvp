@@ -19,6 +19,7 @@ class Plant{
         if(plant.stage === -1 && plant.growing === false){
             this.growing = true;
             plant.changeStage();
+            return false;
         }
         else if(plant.stage === 3 && plant.growing === false){
             // or add plant to inventory here? maybe return plant object/img to add to inventory?
@@ -31,6 +32,7 @@ class Plant{
             setTimeout(function(){
                 plant.changeStage();
             }, 5000);
+            return false;
         }
     }
 
