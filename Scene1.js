@@ -14,12 +14,17 @@ class Scene1 extends Phaser.Scene {
         this.load.image("shovel", "assets/images/shovel.png");
         this.load.image("dirt", "assets/dirt_plot.png");
         this.load.image("seeds", "assets/seeded_plot.png");
+        this.load.image("seeds_watered", "assets/seeded_plot_watered.png")
         this.load.image("hose", "assets/images/hose2.png");
         this.load.image("english_ivy_1", "assets/english_ivy_1.png");
+        this.load.image("english_ivy_1_watered", "assets/english_ivy_1_watered.png");
         this.load.image("english_ivy_2", "assets/english_ivy_2.png");
+        this.load.image("english_ivy_2_watered", "assets/english_ivy_2_watered.png");
         this.load.image("english_ivy_3", "assets/english_ivy_3.png");
         this.load.image("sunflower_1", "assets/Sunflower_1.png");
+        this.load.image("sunflower_1_watered", "assets/Sunflower_1_watered.png");
         this.load.image("sunflower_2", "assets/Sunflower_2.png");
+        this.load.image("sunflower_2_watered", "assets/Sunflower_2_watered.png");
         this.load.image("sunflower_3", "assets/Sunflower_3.png");
 
         //player sprites

@@ -4,6 +4,7 @@ class Plant{
     img;
     x;
     y;
+    growing;
 
     constructor(name, x, y){
         this.stage = -1;
@@ -11,13 +12,20 @@ class Plant{
         this.img = "dirt";
         this.x = x;
         this.y = y;
+        this.growing = false;
     }
 
     water(plant){
-        if(plant.stage === -1){
+        if(plant.stage === -1 && plant.growing === false){
+            this.growing = true;
             plant.changeStage();
         }
-        else{
+        else if(plant.stage === 3 && plant.growing === false){
+            plant.changeStage();
+        }
+        else if(plant.growing === false){
+            this.growing = true;
+            plant.img = plant.img + "_watered"
             setTimeout(function(){
                 plant.changeStage();
             }, 5000);
@@ -25,6 +33,7 @@ class Plant{
     }
 
     changeStage(){
+        this.growing = false;
         if(this.stage === -1){ //dirt stage -> seed stage
             this.stage = 0; 
             this.img = "seeds";
