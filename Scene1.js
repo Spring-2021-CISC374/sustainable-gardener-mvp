@@ -31,6 +31,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image("sunflower_3", "assets/Sunflower_3.png");
         this.load.image("sunflower_3_inv", "assets/Sunflower_3_inv.png");
         this.load.image("sunflower_seeds", "assets/sunflower_seeds.png");
+        this.load.image("inventory", "assets/inventory.png");
 
         //player sprites
         this.load.spritesheet("player_left", "assets/player_left.png", {

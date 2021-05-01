@@ -211,12 +211,16 @@ class Home extends Phaser.Scene {
 
     }, this);
 
-    var g1 = this.add.grid(config.width / 2.82, config.height / 1.15, 1024, 64, 64, 64, 0xffffff, 0.5);
-    g1.setDepth(1);
+    //inventory stuff
 
-    this.container = this.add.container(config.width / 10, config.height / 1.15);
+    // var g1 = this.add.grid(config.width / 2.82, config.height / 1.15, 1024, 64, 64, 64, 0xffffff, 0.5);
+    // g1.setDepth(1);
+
+    this.inventory = this.add.image(config.width/3, config.height/1.15, "inventory");
+    this.inventory.setScale(5,4)
+
+    this.container = this.add.container(config.width / 3, config.height / 1.15);
     this.container.setDepth(2);
-    console.log(this.container);
 
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
@@ -292,6 +296,7 @@ class Home extends Phaser.Scene {
     
     if (Phaser.Input.Keyboard.JustDown(this.i)) {
       this.container.setVisible(!this.container.visible);
+      this.inventory.setVisible(!this.inventory.visible);
     } 
 
   }
