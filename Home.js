@@ -171,16 +171,13 @@ class Home extends Phaser.Scene {
     this.shovel1.setScale(0.25);
     this.shovel1.setInteractive();
     this.shovel1.alpha = 1;
+    app.itemArr.push(this.shovel1);
 
     this.shovel2 = this.add.sprite(config.width / 2 + 50, config.height / 2, "shovel");
     this.shovel2.setInteractive();
     this.shovel2.setScale(0.25);
     this.shovel2.setInteractive();
-
-    this.highlightItem(this.shovel1);
-    this.highlightItem(this.shovel2);
-
-   
+    app.itemArr.push(this.shovel2);
 
     this.input.mouse.disableContextMenu();
 
@@ -199,6 +196,7 @@ class Home extends Phaser.Scene {
               this.checkmark5.setVisible(true);
               if(add){
                 this.addItemtoInventory(this.plants[i]);
+                this.dropSeeds(this.plants[i][0]);
               }
           }
         }
@@ -232,8 +230,9 @@ class Home extends Phaser.Scene {
 
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
+    console.log('object', objectClicked)
  
-    if (objectClicked.texture.key == "shovel") {
+    if (!objectClicked.texture.key.includes("player")) {
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.checkmark2.setVisible(true);
@@ -248,6 +247,7 @@ class Home extends Phaser.Scene {
     var pointer = this.input.activePointer;
     this.movePlayer();
     this.showInventory();
+    this.checkHighlight();
 
     // config.physics.arcade.collide(this.player);
 
@@ -303,6 +303,12 @@ class Home extends Phaser.Scene {
 
   }
 
+  checkHighlight(){
+    for(var i = 0; i < app.itemArr.length; i++){
+      this.highlightItem(app.itemArr[i]);
+    }
+  }
+
   highlightItem(item) {
     item.on('pointerover', () => {
       item.alpha = 0.5;
@@ -331,14 +337,27 @@ class Home extends Phaser.Scene {
 
     var x = 10;
     for (var i = 0; i < app.inventoryArr.length; i++){
-
-      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+      var sprite;
+      if(app.inventoryArr[i].texture.key.includes('seeds')){
+        sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
+      }
+      else{
+        sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+      }
       this.container.add(sprite);
       sprite.setInteractive();
       sprite.inventory = true;
   
       x = x + 64;
     }
+  }
+
+  dropSeeds(plant){
+    console.log('img: ', JSON.stringify(plant.name+"_seeds"))
+    var seeds = this.add.sprite(plant.x, plant.y, plant.name+"_seeds");
+    seeds.setDepth(3);
+    seeds.setInteractive();
+    app.itemArr.push(seeds);
   }
 
 
