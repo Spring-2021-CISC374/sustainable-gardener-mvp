@@ -137,7 +137,6 @@ class Home extends Phaser.Scene {
     this.add.text(1200,230, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,270, "- Now continue walking down the \n  road to get to the town \n  from your home",{fill:"#000000", fontSize:"9px"});
     
-
     // checkmark for player movement
     this.checkmark1 = this.add.image(1190, 150, "checkmark").setVisible(false);
     this.checkmark1.setScale(.025);
