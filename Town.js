@@ -5,13 +5,23 @@ class Town extends Phaser.Scene {
   }
 
     preload(){
-        this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "townImg");
-        this.background.scale = 0.75;
-      this.player = this.physics.add.sprite(760, 40, "playerImg");
+      this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "townImg");
+      this.background.scale = 0.75;
+      this.player = this.physics.add.sprite(760, 40, "player");
+      this.player.play("player_anim_down", false);
       this.load.image("shovel", "assets/shovel.png");
 
       this.load.image("scroll", "assets/scroll.png");
       this.load.image("checkmark", "assets/checkmark.png");
+
+      this.t1 = this.physics.add.sprite(150, 340, "t1");
+      this.t1.play("t1_anim_down", false);
+      this.t1.setInteractive();
+      this.t1.setScale(3);
+      this.cursorKeys = this.input.keyboard.createCursorKeys();
+      this.t1.setCollideWorldBounds(true);
+      this.t1.setDepth(2);
+
     }
 
     create(){
@@ -76,18 +86,38 @@ class Town extends Phaser.Scene {
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D
     });
+
+    this.input.on('gameobjectdown', this.onClicked.bind(this));
+
+    // this.input.on('pointerdown', function (pointer) {
+    //   console.log(pointer.x, pointer.y);
+    // });
+
   }
 
   update() {
-      
     this.showInventory();
-        if(this.player.y <= 30 && this.player.x >= 736 && this.player.x <= 797){
-            this.scene.start('Home');
-          }
-          else{
-            this.movePlayer();
-          }
-    }
+    if(this.player.y <= 30 && this.player.x >= 736 && this.player.x <= 797){
+        this.scene.start('Home');
+      }
+      else{
+        this.movePlayer();
+      }
+  }
+
+  //pointer is the mouse that triggered the event
+  onClicked(pointer, objectClicked) {
+    console.log('object', objectClicked, pointer.x, pointer.y)
+ 
+    // if (!objectClicked.texture.key.includes("player")) {
+    //   this.addItemtoInventory(objectClicked);
+    //   objectClicked.destroy();
+    //   this.checkmark2.setVisible(true);
+    // }
+    // if (objectClicked.inventory == true) {
+    //   this.chosenItem(objectClicked)
+    // }
+  }
 
     movePlayer() {
         this.player.setVelocity(0);
