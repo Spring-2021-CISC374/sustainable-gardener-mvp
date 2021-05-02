@@ -178,6 +178,10 @@ class Home extends Phaser.Scene {
     this.shovel2.setInteractive();
     app.itemArr.push(this.shovel2);
 
+    this.wateringCan = this.add.sprite(config.width / 2 + 150, config.height / 2, "watering_can");
+    this.wateringCan.setScale(0.3)
+    this.wateringCan.setInteractive();
+
     this.input.mouse.disableContextMenu();
 
     this.input.on('pointerdown', function (pointer) {
@@ -231,7 +235,7 @@ class Home extends Phaser.Scene {
   onClicked(pointer, objectClicked) {
     console.log('object', objectClicked)
  
-    if (!objectClicked.texture.key.includes("player")) {
+    if (objectClicked.texture.key == "shovel" || objectClicked.texture.key == "watering_can" ) {
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.checkmark2.setVisible(true);
@@ -319,7 +323,7 @@ class Home extends Phaser.Scene {
   }
 
   chosenItem(item) {
-    item.alpha = 0.5
+    
   }
 
   addItemtoInventory(object) {
@@ -335,19 +339,13 @@ class Home extends Phaser.Scene {
     }
 
     var x = 10;
-    for (var i = 0; i < app.inventoryArr.length; i++){
-      var sprite;
-      if(app.inventoryArr[i].texture.key.includes('seeds')){
-        sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
-      }
-      else{
-        sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
-      }
-      this.container.add(sprite);
-      sprite.setInteractive();
-      sprite.inventory = true;
-  
-      x = x + 64;
+    var x = 0;
+     for (var i = 0; i < app.inventoryArr.length; i++){
+       console.log(app.inventoryArr[i]);
+       var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
+       sprite.setScale(0.2);
+       this.container.add(sprite);
+       x = x + 64
     }
   }
 
