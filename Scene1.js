@@ -23,7 +23,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image("english_ivy_2_watered", "assets/english_ivy_2_watered.png");
         this.load.image("english_ivy_3", "assets/english_ivy_3.png");
         this.load.image("english_ivy_3_inv", "assets/english_ivy_3_inv.png");
-        this.load.image("english_ivy_seeds", "assets/english_ivy_seeds.png")
+        this.load.image("english_ivy_seeds", "assets/english_ivy_seeds.png");
+        this.load.image("english_ivy_seeds_inv", "assets/english_ivy_seeds_inv.png");
         this.load.image("sunflower_1", "assets/Sunflower_1.png");
         this.load.image("sunflower_1_watered", "assets/Sunflower_1_watered.png");
         this.load.image("sunflower_2", "assets/Sunflower_2.png");
@@ -31,6 +32,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image("sunflower_3", "assets/Sunflower_3.png");
         this.load.image("sunflower_3_inv", "assets/Sunflower_3_inv.png");
         this.load.image("sunflower_seeds", "assets/sunflower_seeds.png");
+        this.load.image("sunflower_seeds_inv", "assets/sunflower_seeds_inv.png");
         this.load.image("inventory", "assets/inventory.png");
 
         //player sprites
@@ -56,7 +58,7 @@ class Scene1 extends Phaser.Scene {
             frameWidth: 16,
             frameHeight: 18
         });
-        this.load.spritesheet("t1_down", "assets/Townsperson1_down.png", {
+        this.load.spritesheet("t1_down", "assets/t1_down.png", {
             frameWidth: 16,
             frameHeight: 18
         });

@@ -18,6 +18,7 @@ class Home extends Phaser.Scene {
     this.load.image("tiles", "assets/tilesets/homeTS.json");
     
     this.player = this.physics.add.sprite(650, 450, "player");
+    this.player.play("player_anim_down", false);
     this.load.image("shovel", "assets/shovel.png");
     this.load.image("scroll", "assets/scroll.png");
     this.load.image("checkmark", "assets/checkmark.png");
@@ -59,13 +60,11 @@ class Home extends Phaser.Scene {
       }
     });
 
-    this.gardenArea = this.add.grid(300, 575, 400, 400, 40, 40, 0xFFFFFF)
+    this.gardenArea = this.add.grid(300, 575, 400, 400, 40, 40, 0x604c44)
     this.gardenArea.setDepth(0);
 
     this.plantCount = 0; 
     this.plants = [];
-
-    // this.gradenArea = this.add.grid(300, 575, 400, 400, 40, 40, 0x604c44)
 
     //english ivy plants 
     this.ivy = new Plant("english_ivy", 120, 395);
@@ -199,11 +198,6 @@ class Home extends Phaser.Scene {
               }
           }
         }
-        // else{
-        //   this.shovelImg = this.add.image(pointer.x, pointer.y, 'shovel');
-        //   this.shovelImg.setScale(0.25);
-        // }
-
       }
 
     }, this);
@@ -229,9 +223,9 @@ class Home extends Phaser.Scene {
 
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
-    console.log('object', objectClicked)
  
-    if (!objectClicked.texture.key.includes("player")) {
+    if (objectClicked.texture.key === "shovel" || objectClicked.texture.key === "sunflower_seeds" || 
+        objectClicked.texture.key === "english_ivy_seeds") {
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.checkmark2.setVisible(true);
@@ -297,8 +291,6 @@ class Home extends Phaser.Scene {
       this.container.setVisible(!this.container.visible);
       this.inventory.setVisible(!this.inventory.visible);
     }
-    
-    
 
   }
 
@@ -323,36 +315,24 @@ class Home extends Phaser.Scene {
   }
 
   addItemtoInventory(object) {
-    
-    var plantobj = false;
     if(object[1] !== undefined){ 
-      plantobj = true;
       app.inventoryArr.push(object[1]);
     }
     else{
-      plantobj = false;
       app.inventoryArr.push(object)
     }
 
-    var x = 10;
+    var x = -230;
     for (var i = 0; i < app.inventoryArr.length; i++){
-      var sprite;
-      if(app.inventoryArr[i].texture.key.includes('seeds')){
-        sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
-      }
-      else{
-        sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
-      }
+      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
       this.container.add(sprite);
       sprite.setInteractive();
       sprite.inventory = true;
-  
       x = x + 64;
     }
   }
 
   dropSeeds(plant){
-    console.log('img: ', JSON.stringify(plant.name+"_seeds"))
     var seeds = this.add.sprite(plant.x, plant.y, plant.name+"_seeds");
     seeds.setDepth(3);
     seeds.setInteractive();
