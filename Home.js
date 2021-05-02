@@ -316,7 +316,13 @@ class Home extends Phaser.Scene {
   }
 
   chosenItem(item) {
-    
+    if (app.currentItem.length == 0) {
+      app.currentItem.push(item)
+    } else {
+      Phaser.Utils.Array.RemoveAt(app.currentItem, 0);
+      app.currentItem.push(item)
+    }
+  
   }
 
   addItemtoInventory(object) {
