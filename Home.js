@@ -212,10 +212,6 @@ class Home extends Phaser.Scene {
     }, this);
 
     //inventory stuff
-
-    // var g1 = this.add.grid(config.width / 2.82, config.height / 1.15, 1024, 64, 64, 64, 0xffffff, 0.5);
-    // g1.setDepth(1);
-
     this.inventory = this.add.image(config.width/3, config.height/1.15, "inventory");
     this.inventory.setScale(5,4)
 
@@ -236,11 +232,14 @@ class Home extends Phaser.Scene {
 
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
-    if(objectClicked !== this.player && objectClicked.img === undefined){
+ 
+    if (objectClicked.texture.key == "shovel") {
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.checkmark2.setVisible(true);
-
+    }
+    if (objectClicked.inventory == true) {
+      this.chosenItem(objectClicked)
     }
   }
 
@@ -249,6 +248,7 @@ class Home extends Phaser.Scene {
     var pointer = this.input.activePointer;
     this.movePlayer();
     this.showInventory();
+
     // config.physics.arcade.collide(this.player);
 
     if(this.player.y >= 760 && this.player.x >= 635 && this.player.x <= 689){
@@ -297,7 +297,9 @@ class Home extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(this.i)) {
       this.container.setVisible(!this.container.visible);
       this.inventory.setVisible(!this.inventory.visible);
-    } 
+    }
+    
+    
 
   }
 
@@ -309,6 +311,10 @@ class Home extends Phaser.Scene {
     item.on('pointerout', () => {
       item.alpha = 1;
     })
+  }
+
+  chosenItem(item) {
+    item.alpha = 0.5
   }
 
   addItemtoInventory(object) {
@@ -325,9 +331,12 @@ class Home extends Phaser.Scene {
 
     var x = 10;
     for (var i = 0; i < app.inventoryArr.length; i++){
-      console.log(app.inventoryArr[i]);
+
       var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
       this.container.add(sprite);
+      sprite.setInteractive();
+      sprite.inventory = true;
+  
       x = x + 64;
     }
   }
