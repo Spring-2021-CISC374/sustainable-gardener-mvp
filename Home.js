@@ -127,7 +127,9 @@ class Home extends Phaser.Scene {
 
 
     // task list 
-    this.paper = this.add.image(1275, 200, "scroll");
+    // this.paper = this.add.image(1275, 200, "scroll");
+    // this.paper.setScale(0.25);
+    this.paper = this.add.image(config.width/1.5, config.height/5, "scroll");
     this.paper.setScale(0.25);
     this.add.text(1200,100, "Task List:",{fill:"#000000", fontSize:"25px"});
     this.add.text(1200, 150, "- Use the WASD keys to move player", { fill: "#000000", fontSize: "9px" });
@@ -160,6 +162,10 @@ class Home extends Phaser.Scene {
     // checkmark for hidind/showing inventory
     this.checkmark6 = this.add.image(1190, 305, "checkmark").setVisible(false);
     this.checkmark6.setScale(.025);   
+    
+    this.container1 = this.add.container(config.width/3, config.height/1.15);
+    this.container1.setDepth(2);
+
 
     // player movement
     this.player.setInteractive();
@@ -217,6 +223,9 @@ class Home extends Phaser.Scene {
 
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
+    this.t = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+
+
     //add a listener to the scene, this will pass the object clicked to the function
     this.input.on('gameobjectdown', this.onClicked.bind(this));
     this.cursorKeys = this.input.keyboard.addKeys({
@@ -248,6 +257,7 @@ class Home extends Phaser.Scene {
     this.movePlayer();
     this.showInventory();
     this.checkHighlight();
+    this.showTaskList();
 
     // config.physics.arcade.collide(this.player);
 
@@ -299,6 +309,15 @@ class Home extends Phaser.Scene {
       this.checkmark6.setVisible(true)
     }
 
+  }
+
+  showTaskList() {
+    var p = this.input.keyboard.addKey("p");
+    
+    if (Phaser.Input.Keyboard.JustDown(this.t)) {
+      this.container1.setVisible(!this.container.visible);
+      this.paper.setVisible(!this.paper.visible);
+    } 
   }
 
   checkHighlight(){
