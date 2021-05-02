@@ -1,31 +1,31 @@
 class Town extends Phaser.Scene {
 
-    constructor(){
-        super("Town");
-    }
+  constructor(){
+      super("Town");
+  }
 
-    preload(){
-        this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "townImg");
-        this.background.scale = 0.75;
-      this.player = this.physics.add.sprite(760, 40, "playerImg");
-      this.load.image("shovel", "assets/shovel.png");
-    }
+  preload(){
+    this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "townImg");
+    this.background.scale = 0.75;
+    this.player = this.physics.add.sprite(760, 40, "playerImg");
+    this.load.image("shovel", "assets/shovel.png");
+  }
 
-    create(){
-        this.add.text(20, 20, "Sustainable Gardener", {
-            font: "25px Courier",
-            fill: "white",
-            align: "center",
-            shadow: {
-              offsetX: 2,
-              offsetY: 2,
-              color: '#2e2e2e',
-              blur: 5,
-              fill: true
-            }
-        });
+  create(){
+    this.add.text(20, 20, "Sustainable Gardener", {
+        font: "25px Courier",
+        fill: "white",
+        align: "center",
+        shadow: {
+          offsetX: 2,
+          offsetY: 2,
+          color: '#2e2e2e',
+          blur: 5,
+          fill: true
+        }
+    });
       
-      //inventory stuff
+    //inventory stuff
 
     this.inventory = this.add.image(config.width/3, config.height/1.15, "inventory");
     this.inventory.setScale(5,4)
@@ -37,11 +37,18 @@ class Town extends Phaser.Scene {
 
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
-        this.player.setInteractive();
-        this.player.setScale(3);
-        this.cursorKeys = this.input.keyboard.createCursorKeys();
-        this.player.setCollideWorldBounds(true);
-    }
+    this.player.setInteractive();
+    this.player.setScale(3);
+    this.cursorKeys = this.input.keyboard.createCursorKeys();
+    this.player.setCollideWorldBounds(true);
+
+    this.cursorKeys = this.input.keyboard.addKeys({
+      up: Phaser.Input.Keyboard.KeyCodes.W,
+      down: Phaser.Input.Keyboard.KeyCodes.S,
+      left: Phaser.Input.Keyboard.KeyCodes.A,
+      right: Phaser.Input.Keyboard.KeyCodes.D
+    });
+  }
 
   update() {
       
