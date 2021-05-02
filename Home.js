@@ -130,11 +130,12 @@ class Home extends Phaser.Scene {
     this.paper = this.add.image(1275, 200, "scroll");
     this.paper.setScale(0.25);
     this.add.text(1200,100, "Task List:",{fill:"#000000", fontSize:"25px"});
-    this.add.text(1200,150, "- Use the WASD keys to move player",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200, 150, "- Use the WASD keys to move player", { fill: "#000000", fontSize: "9px" });
     this.add.text(1200,175, "- Click on the shovel to pick \n it up",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,200, "- Right click to put down or \n drop an object",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,230, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
-    this.add.text(1200,270, "- Now continue walking down the \n  road to get to the town \n  from your home",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200, 270, "- Now continue walking down the \n  road to get to the town \n  from your home", { fill: "#000000", fontSize: "9px" });
+    this.add.text(1200,305, "- Click on I to hide and show the \ninventory",{fill:"#000000", fontSize:"9px"});
     
     // checkmark for player movement
     this.checkmark1 = this.add.image(1190, 150, "checkmark").setVisible(false);
@@ -156,6 +157,9 @@ class Home extends Phaser.Scene {
     this.checkmark5 = this.add.image(1190, 230, "checkmark").setVisible(false);
     this.checkmark5.setScale(.025);   
     
+    // checkmark for hidind/showing inventory
+    this.checkmark6 = this.add.image(1190, 305, "checkmark").setVisible(false);
+    this.checkmark6.setScale(.025);   
 
     // player movement
     this.player.setInteractive();
@@ -253,7 +257,7 @@ class Home extends Phaser.Scene {
     if(this.player.y >= 783 && this.player.x >= 635 && this.player.x <= 689){
       this.scene.start('Town');
     }
-    if(this.checkmark1.visible && this.checkmark2.visible && this.checkmark3.visible && this.checkmark4.visible){
+    if(this.checkmark1.visible && this.checkmark2.visible && this.checkmark3.visible && this.checkmark4.visible && this.checkmark6.visible){
       config.tutorial = false;
     }
 
@@ -287,12 +291,12 @@ class Home extends Phaser.Scene {
   }
 
   showInventory() {
-    
     var o = this.input.keyboard.addKey("o");
     
     if (Phaser.Input.Keyboard.JustDown(this.i)) {
       this.container.setVisible(!this.container.visible);
       this.inventory.setVisible(!this.inventory.visible);
+      this.checkmark6.setVisible(true)
     }
 
   }
