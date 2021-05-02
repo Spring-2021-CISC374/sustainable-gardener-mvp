@@ -164,15 +164,12 @@ class Home extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(2);
 
-    this.shovel1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "shovel");
-    this.shovel1.setInteractive();
-    this.shovel1.setScale(0.25);
-    this.shovel1.setInteractive();
-    this.shovel1.alpha = 1;
-    app.itemArr.push(this.shovel1);
+    // this.shovel1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "shovel");
+    // this.shovel1.setScale(0.25);
+    // this.shovel1.setInteractive();
+    // app.itemArr.push(this.shovel1);
 
     this.shovel2 = this.add.sprite(config.width / 2 + 50, config.height / 2, "shovel");
-    this.shovel2.setInteractive();
     this.shovel2.setScale(0.25);
     this.shovel2.setInteractive();
     app.itemArr.push(this.shovel2);
@@ -237,11 +234,12 @@ class Home extends Phaser.Scene {
     }
     if (objectClicked.inventory == true) {
       this.chosenItem(objectClicked)
+     
     }
   }
 
   update() {
-    this.shovel1.angle += 1;
+    // this.shovel1.angle += 1;
     var pointer = this.input.activePointer;
     this.movePlayer();
     this.showInventory();
@@ -318,11 +316,13 @@ class Home extends Phaser.Scene {
   chosenItem(item) {
     if (app.currentItem.length == 0) {
       app.currentItem.push(item)
+      
     } else {
+      app.currentItem[0].alpha=1
       Phaser.Utils.Array.RemoveAt(app.currentItem, 0);
       app.currentItem.push(item)
     }
-  
+ 
   }
 
   addItemtoInventory(object) {
