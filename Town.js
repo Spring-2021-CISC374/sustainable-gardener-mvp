@@ -39,7 +39,7 @@ class Town extends Phaser.Scene {
         });
         
       //task list 
-      this.paper = this.add.image(1275, 175, "scroll");
+      this.paper = this.add.image(config.width/1.5, config.height/6, "scroll");
       this.paper.setScale(0.25);
       this.add.text(1200, 80, "Task List:",{fill:"#000000", fontSize:"25px"});
       this.add.text(1200,115, "- Find and speak to a member \n from your town",{fill:"#000000", fontSize:"9px"});
@@ -60,7 +60,8 @@ class Town extends Phaser.Scene {
     // this.checkmark3 = this.add.image(1190, 200, "checkmark").setVisible(false);
     // this.checkmark3.setScale(.025);    
 
-        
+      this.container1 = this.add.container(config.width/3, config.height/1.15);
+      this.container1.setDepth(2);
         
       
     //inventory stuff
@@ -74,6 +75,8 @@ class Town extends Phaser.Scene {
     console.log(app.inventoryArr)
 
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+
+    this.t = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
 
     this.player.setInteractive();
     this.player.setScale(3);
@@ -97,6 +100,7 @@ class Town extends Phaser.Scene {
 
   update() {
     this.showInventory();
+    this.showTaskList();
     if(this.player.y <= 30 && this.player.x >= 736 && this.player.x <= 797){
         this.scene.start('Home');
       }
@@ -149,6 +153,15 @@ class Town extends Phaser.Scene {
         this.inventory.setVisible(!this.inventory.visible);
       } 
   
+    }
+
+    showTaskList() {
+      var p = this.input.keyboard.addKey("p");
+      
+      if (Phaser.Input.Keyboard.JustDown(this.t)) {
+        this.container1.setVisible(!this.container.visible);
+        this.paper.setVisible(!this.paper.visible);
+      } 
     }
   
     highlightItem(item) {
