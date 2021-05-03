@@ -8,6 +8,7 @@ class Scene1 extends Phaser.Scene {
         config.tutorial = true;
         
         //load static images
+        this.load.image("title", "assets/title.png");
         this.load.image("homeImg", "assets/HomeImage.png");
         this.load.image("townImg", "assets/Town_image.png");
         this.load.image("shovel", "assets/shovel.png");
@@ -36,6 +37,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image("inventory", "assets/inventory.png");
         this.load.image("textbubble", "assets/textbubble.png");
         this.load.image('x_button', "assets/x.png");
+        this.load.image("watering_can", "assets/watering-can.png");
 
         //player sprites
         this.load.spritesheet("player_left", "assets/player_left.png", {
@@ -90,7 +92,7 @@ class Scene1 extends Phaser.Scene {
 
     create() {
         this.add.text(20, 20, "Loading game...");
-        this.scene.start("Home");
+        this.scene.start("Title");
 
         //player animation
         this.anims.create({

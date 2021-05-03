@@ -1,8 +1,7 @@
-
 var config = {
     width: 1917,
     height: 1077,
-    scene: [Scene1, Home, Town],
+    scene: [Scene1, Title, Home, Town],
     physics: {
       default: "arcade",
       arcade: {
@@ -16,6 +15,7 @@ var config = {
 var app = {
   inventoryArr: [],
   itemArr: [],
+  currentItem: []
 }
 
 

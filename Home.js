@@ -127,14 +127,17 @@ class Home extends Phaser.Scene {
 
 
     // task list 
-    this.paper = this.add.image(1275, 200, "scroll");
+    // this.paper = this.add.image(1275, 200, "scroll");
+    // this.paper.setScale(0.25);
+    this.paper = this.add.image(config.width/1.5, config.height/5, "scroll");
     this.paper.setScale(0.25);
     this.add.text(1200,100, "Task List:",{fill:"#000000", fontSize:"25px"});
-    this.add.text(1200,150, "- Use the WASD keys to move player",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200, 150, "- Use the WASD keys to move player", { fill: "#000000", fontSize: "9px" });
     this.add.text(1200,175, "- Click on the shovel to pick \n it up",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,200, "- Right click to put down or \n drop an object",{fill:"#000000", fontSize:"9px"});
     this.add.text(1200,230, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
-    this.add.text(1200,270, "- Now continue walking down the \n  road to get to the town \n  from your home",{fill:"#000000", fontSize:"9px"});
+    this.add.text(1200, 270, "- Now continue walking down the \n  road to get to the town \n  from your home", { fill: "#000000", fontSize: "9px" });
+    this.add.text(1200,305, "- Click on I to hide and show the \ninventory",{fill:"#000000", fontSize:"9px"});
     
     // checkmark for player movement
     this.checkmark1 = this.add.image(1190, 150, "checkmark").setVisible(false);
@@ -156,6 +159,13 @@ class Home extends Phaser.Scene {
     this.checkmark5 = this.add.image(1190, 230, "checkmark").setVisible(false);
     this.checkmark5.setScale(.025);   
     
+    // checkmark for hidind/showing inventory
+    this.checkmark6 = this.add.image(1190, 305, "checkmark").setVisible(false);
+    this.checkmark6.setScale(.025);   
+    
+    this.container1 = this.add.container(config.width/3, config.height/1.15);
+    this.container1.setDepth(2);
+
 
     // player movement
     this.player.setInteractive();
@@ -164,18 +174,20 @@ class Home extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(2);
 
-    this.shovel1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "shovel");
-    this.shovel1.setInteractive();
-    this.shovel1.setScale(0.25);
-    this.shovel1.setInteractive();
-    this.shovel1.alpha = 1;
-    app.itemArr.push(this.shovel1);
+    // this.shovel1 = this.add.sprite(config.width / 2 - 50, config.height / 2, "shovel");
+    // this.shovel1.setScale(0.25);
+    // this.shovel1.setInteractive();
+    // app.itemArr.push(this.shovel1);
 
     this.shovel2 = this.add.sprite(config.width / 2 + 50, config.height / 2, "shovel");
-    this.shovel2.setInteractive();
     this.shovel2.setScale(0.25);
     this.shovel2.setInteractive();
     app.itemArr.push(this.shovel2);
+
+    this.wateringCan = this.add.sprite(config.width / 2 + 150, config.height / 2, "watering_can");
+    this.wateringCan.setScale(0.3)
+    this.wateringCan.setInteractive();
+    this.highlightItem(this.wateringCan)
 
     this.input.mouse.disableContextMenu();
 
@@ -202,13 +214,16 @@ class Home extends Phaser.Scene {
     }, this);
 
     //inventory stuff
-    this.inventory = this.add.image(config.width/3, config.height/1.15, "inventory");
-    this.inventory.setScale(5,4)
+    this.inventory = this.add.image(config.width/3, config.height/1.5, "inventory");
+    this.inventory.setScale(5,3)
 
-    this.container = this.add.container(config.width / 3, config.height / 1.15);
+    this.container = this.add.container(config.width / 3, config.height / 1.5);
     this.container.setDepth(2);
 
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+
+    this.t = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+
 
     //add a listener to the scene, this will pass the object clicked to the function
     this.input.on('gameobjectdown', this.onClicked.bind(this));
@@ -223,23 +238,25 @@ class Home extends Phaser.Scene {
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
  
-    if (objectClicked.texture.key === "shovel" || objectClicked.texture.key === "sunflower_seeds" || 
-        objectClicked.texture.key === "english_ivy_seeds") {
+    if ((objectClicked.texture.key === "shovel" || objectClicked.texture.key === "sunflower_seeds" || 
+        objectClicked.texture.key === "english_ivy_seeds" || objectClicked.texture.key === "watering_can") && objectClicked.inventory==null) {
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.checkmark2.setVisible(true);
     }
     if (objectClicked.inventory == true) {
       this.chosenItem(objectClicked)
+     
     }
   }
 
   update() {
-    this.shovel1.angle += 1;
+    // this.shovel1.angle += 1;
     var pointer = this.input.activePointer;
     this.movePlayer();
     this.showInventory();
     this.checkHighlight();
+    this.showTaskList();
 
     // config.physics.arcade.collide(this.player);
 
@@ -249,7 +266,7 @@ class Home extends Phaser.Scene {
     if(this.player.y >= 783 && this.player.x >= 635 && this.player.x <= 689){
       this.scene.start('Town');
     }
-    if(this.checkmark1.visible && this.checkmark2.visible && this.checkmark3.visible && this.checkmark4.visible){
+    if(this.checkmark1.visible && this.checkmark2.visible && this.checkmark3.visible && this.checkmark4.visible && this.checkmark6.visible){
       config.tutorial = false;
     }
 
@@ -283,14 +300,23 @@ class Home extends Phaser.Scene {
   }
 
   showInventory() {
-    
     var o = this.input.keyboard.addKey("o");
     
     if (Phaser.Input.Keyboard.JustDown(this.i)) {
       this.container.setVisible(!this.container.visible);
       this.inventory.setVisible(!this.inventory.visible);
+      this.checkmark6.setVisible(true)
     }
 
+  }
+
+  showTaskList() {
+    var p = this.input.keyboard.addKey("p");
+    
+    if (Phaser.Input.Keyboard.JustDown(this.t)) {
+      this.container1.setVisible(!this.container.visible);
+      this.paper.setVisible(!this.paper.visible);
+    } 
   }
 
   checkHighlight(){
@@ -310,7 +336,15 @@ class Home extends Phaser.Scene {
   }
 
   chosenItem(item) {
-    item.alpha = 0.5
+    if (app.currentItem.length == 0) {
+      app.currentItem.push(item)
+      
+    } else {
+      app.currentItem[0].alpha=1
+      Phaser.Utils.Array.RemoveAt(app.currentItem, 0);
+      app.currentItem.push(item)
+    }
+ 
   }
 
   addItemtoInventory(object) {
@@ -323,7 +357,8 @@ class Home extends Phaser.Scene {
 
     var x = -230;
     for (var i = 0; i < app.inventoryArr.length; i++){
-      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
+      sprite.setScale(0.2);
       this.container.add(sprite);
       sprite.setInteractive();
       sprite.inventory = true;
