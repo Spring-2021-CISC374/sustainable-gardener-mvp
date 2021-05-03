@@ -184,10 +184,10 @@ class Home extends Phaser.Scene {
     this.shovel2.setInteractive();
     app.itemArr.push(this.shovel2);
 
-    this.wateringCan = this.add.sprite(config.width / 2 + 150, config.height / 2, "watering_can_inv");
+    this.wateringCan = this.add.sprite(config.width / 2 + 150, config.height / 2, "watering_can");
     this.wateringCan.setScale(0.3)
     this.wateringCan.setInteractive();
-    this.highlightItem(this.wateringCan)
+    app.itemArr.push(this.wateringCan);
 
     this.input.mouse.disableContextMenu();
 
@@ -245,7 +245,7 @@ class Home extends Phaser.Scene {
   onClicked(pointer, objectClicked) {
  
     if ((objectClicked.texture.key === "shovel" || objectClicked.texture.key === "sunflower_seeds" || 
-        objectClicked.texture.key === "english_ivy_seeds" || objectClicked.texture.key === "watering_can_inv") && objectClicked.inventory==null) {
+        objectClicked.texture.key === "english_ivy_seeds" || objectClicked.texture.key === "watering_can") && objectClicked.inventory==null) {
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
       this.checkmark2.setVisible(true);

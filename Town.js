@@ -15,7 +15,7 @@ class Town extends Phaser.Scene {
       this.load.image("checkmark", "assets/checkmark.png");
 
       this.t1 = this.physics.add.sprite(150, 340, "t1");
-      this.t1.play("t1_anim_down", false);
+      this.t1.play("Glenn_anim_down", false);
       this.t1.setInteractive();
       this.t1.setScale(3);
       this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -24,7 +24,7 @@ class Town extends Phaser.Scene {
       this.t1.id = new Townsperson("Glenn", this.t1.x, this.t1.y);
 
       this.t2 = this.physics.add.sprite(1300, 600, "t2");
-      this.t2.play("t2_anim_right", false);
+      this.t2.play("Darren_anim_right", false);
       this.t2.setInteractive();
       this.t2.setScale(3);
       this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -80,7 +80,7 @@ class Town extends Phaser.Scene {
     this.inventory.setScale(5,3)
 
     this.container = this.add.container(config.width / 1.8, config.height / 1.5);
-      this.container.setDepth(2);
+    this.container.setDepth(2);
 
       var x = 10;
       for (var i = 0; i < app.inventoryArr.length; i++){
@@ -93,13 +93,13 @@ class Town extends Phaser.Scene {
     // popup for talking to person
     this.blur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
     this.talkScreen = this.add.image(750, 500, "textbubble");
-    this.talkScreen.setScale(12,10)
+    this.talkScreen.setScale(8,6)
     this.talkScreen.text = '';
     this.talkScreen.setVisible(false);
     this.blur.setVisible(false);
 
     //button for exiting speech bubble
-    this.xbutton = this.add.image(850, 500, 'x_button');
+    this.xbutton = this.add.image(1050, 600, 'x_button');
     this.xbutton.setScale(5,4);
     this.xbutton.setInteractive();
     this.xbutton.setVisible(false);
@@ -153,7 +153,7 @@ class Town extends Phaser.Scene {
   onClicked(pointer, objectClicked) {
     console.log('object', objectClicked, pointer.x, pointer.y)
 
-    if(this.canTalk && !objectClicked.texture.key.includes('player')){
+    if(this.canTalk && (objectClicked.texture.key.includes('t1') || objectClicked.texture.key.includes("t2"))){
       this.talk(objectClicked);
     }
     // if (!objectClicked.texture.key.includes("player")) {
@@ -197,6 +197,10 @@ class Town extends Phaser.Scene {
     }
 
     talk(person){
+      if (!this.blur.visible){
+        person.id.talking = false;
+        this.canTalk = true;
+      }
       console.log("person", person)
       if(this.canTalk){
         this.canTalk = false;
@@ -212,29 +216,27 @@ class Town extends Phaser.Scene {
           this.showTextBubble(person);
           person.id.talkCount+=1; 
         }
-        else{
-          if (!this.blur.visible){
-            person.id.talking = false;
-          }
-        }
+        
       }
       // console.log('you are talking to: '+ person.id.name + " you have talked " + person.id.talkCount +" times");
     }
 
     showTextBubble(person){
-      person.id.talking = true;
-      this.talkScreen.setVisible(true);
-      this.blur.setVisible(true);
-      this.xbutton.setVisible(true);
       var text = person.id.conversations[person.id.talkCount];
-      this.convo = this.add.text(250, 150, text, {
-        font: "25px Courier",
-        fill: "0x995f40",
-        align: "left"}
-      );
-      this.convo.setVisible(true);
-      if(person.id.talkCount === 1){
-        this.dropSeeds();
+      if(!!text){
+        person.id.talking = true;
+        this.talkScreen.setVisible(true);
+        this.blur.setVisible(true);
+        this.xbutton.setVisible(true);
+        this.convo = this.add.text(300, 410, text, {
+          font: "20px Courier",
+          fill: "0x995f40",
+          align: "left"}
+        );
+        this.convo.setVisible(true);
+        if(person.id.talkCount === 1){
+          this.dropSeeds();
+        }
       }
     }
 

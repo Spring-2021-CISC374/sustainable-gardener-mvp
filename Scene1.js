@@ -37,7 +37,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image("inventory", "assets/inventory.png");
         this.load.image("textbubble", "assets/textbubble.png");
         this.load.image('x_button', "assets/x.png");
-        this.load.image("watering_can_inv", "assets/watering-can.png");
+        this.load.image("watering_can", "assets/watering_can.png");
+        this.load.image("watering_can_inv", "assets/watering_can_inv.png");
 
         //player sprites
         this.load.spritesheet("player_left", "assets/player_left.png", {
@@ -85,8 +86,8 @@ class Scene1 extends Phaser.Scene {
 
         //townsperson1 (t2) sprites
         this.load.spritesheet("t2_left", "assets/t2_left.png", {
-            frameWidth: 30,
-            frameHeight: 30
+            frameWidth: 16,
+            frameHeight: 18
         });
         this.load.spritesheet("t2_down", "assets/t2_down.png", {
             frameWidth: 16,
@@ -98,7 +99,7 @@ class Scene1 extends Phaser.Scene {
         });
         this.load.spritesheet("t2_right", "assets/t2_right.png", {
             frameWidth: 16,
-            frameHeight: 19
+            frameHeight: 18
         });
 
         
@@ -139,37 +140,37 @@ class Scene1 extends Phaser.Scene {
 
         //townsperson1 animation
         this.anims.create({
-            key: "t1_anim_left",
+            key: "Glenn_anim_left",
             frames: this.anims.generateFrameNames("t1_left", {start: 1}),
             frameRate: 10,
             repeat: 0
         });
         this.anims.create({
-            key: "t1_anim_right",
+            key: "Glenn_anim_right",
             frames: this.anims.generateFrameNames("t1_right", {start: 1}),
             frameRate: 10,
             repeat: 0
         });
         this.anims.create({
-            key: "t1_anim_up",
+            key: "Glenn_anim_up",
             frames: this.anims.generateFrameNames("t1_up", {start: 1}),
             frameRate: 10,
             repeat: 0
         });
         this.anims.create({
-            key: "t1_anim_down",
+            key: "Glenn_anim_down",
             frames: this.anims.generateFrameNames("t1_down", {start: 1}),
             frameRate: 10,
             repeat: 0
         });
         this.anims.create({
-            key: "t1_anim_stand_left",
+            key: "Glenn_anim_stand_left",
             frames: this.anims.generateFrameNames("t1_stand_left", {start: 1}),
             frameRate: 10,
             repeat: 0
         });
         this.anims.create({
-            key: "t1_anim_stand_right",
+            key: "Glenn_anim_stand_right",
             frames: this.anims.generateFrameNames("t1_stand_right", {start: 1}),
             frameRate: 10,
             repeat: 0
@@ -177,37 +178,37 @@ class Scene1 extends Phaser.Scene {
 
     //townsperson2 animation
     this.anims.create({
-        key: "t2_anim_left",
+        key: "Darren_anim_left",
         frames: this.anims.generateFrameNames("t2_left", {start: 1}),
         frameRate: 10,
         repeat: 0
     });
     this.anims.create({
-        key: "t2_anim_right",
+        key: "Darren_anim_right",
         frames: this.anims.generateFrameNames("t2_right", {start: 1}),
         frameRate: 10,
         repeat: 0
     });
     this.anims.create({
-        key: "t2_anim_up",
+        key: "Darren_anim_up",
         frames: this.anims.generateFrameNames("t2_up", {start: 1}),
         frameRate: 10,
         repeat: 0
     });
     this.anims.create({
-        key: "t2_anim_down",
+        key: "Darren_anim_down",
         frames: this.anims.generateFrameNames("t2_down", {start: 1}),
         frameRate: 10,
         repeat: 0
     });
     this.anims.create({
-        key: "t2_anim_stand_left",
+        key: "Darren_anim_stand_left",
         frames: this.anims.generateFrameNames("t2_left", {start: 1}),
         frameRate: 10,
         repeat: 0
     });
     this.anims.create({
-        key: "t2_anim_stand_right",
+        key: "Darren_anim_stand_right",
         frames: this.anims.generateFrameNames("t2_right", {start: 1}),
         frameRate: 10,
         repeat: 0
