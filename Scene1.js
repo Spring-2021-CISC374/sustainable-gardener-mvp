@@ -37,7 +37,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image("inventory", "assets/inventory.png");
         this.load.image("textbubble", "assets/textbubble.png");
         this.load.image('x_button', "assets/x.png");
-        this.load.image("watering_can", "assets/watering-can.png");
+        this.load.image("watering_can_inv", "assets/watering-can.png");
 
         //player sprites
         this.load.spritesheet("player_left", "assets/player_left.png", {
