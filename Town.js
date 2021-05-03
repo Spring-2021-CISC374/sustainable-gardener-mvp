@@ -76,14 +76,14 @@ class Town extends Phaser.Scene {
 
     // popup for talking to person
     this.blur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
-    this.talkScreen = this.add.image(750, 500, "textbubble");
+    this.talkScreen = this.add.image(750, 400, "textbubble");
     this.talkScreen.setScale(5,4)
     this.talkScreen.text = '';
     this.talkScreen.setVisible(false);
     this.blur.setVisible(false);
 
     //button for exiting speech bubble
-    this.xbutton = this.add.image(750, 500, 'x_button');
+    this.xbutton = this.add.image(850, 500, 'x_button');
     this.xbutton.setScale(5,4);
     this.xbutton.setInteractive();
     this.xbutton.setVisible(false);
@@ -211,8 +211,8 @@ class Town extends Phaser.Scene {
       this.blur.setVisible(true);
       this.xbutton.setVisible(true);
       var text = person.id.conversations[person.id.talkCount];
-      this.convo = this.add.text(550, 350, text, {
-        font: "25px Courier",
+      this.convo = this.add.text(450, 350, text, {
+        font: "20px Courier",
         fill: "0x995f40",
         align: "left"}
       );
