@@ -68,10 +68,10 @@ class Town extends Phaser.Scene {
         
     //inventory stuff
 
-    this.inventory = this.add.image(config.width/3, config.height/1.15, "inventory");
-    this.inventory.setScale(5,4)
+    this.inventory = this.add.image(config.width/1.8, config.height/1.5, "inventory");
+    this.inventory.setScale(5,3)
 
-    this.container = this.add.container(config.width / 3, config.height / 1.15);
+    this.container = this.add.container(config.width / 1.8, config.height / 1.15);
     this.container.setDepth(2);
 
     // popup for talking to person
