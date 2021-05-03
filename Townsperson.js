@@ -15,7 +15,7 @@ class Townsperson{
         this.conversations = []
         if (name == "Glenn"){
             this.conversations = [
-                "Glen:\n\n Hello! I have been looking all over for you.\n I am the Mayor and would like to welcome you to our town.\n I know it doesn't look great right now but with your help I think we can fix this place up! \n\n You: \n\n How can I help?",
+                "Glen:\n\n Hello! I have been looking all over for you.\n I am the Mayor and would like to welcome you to our town.\n I know it doesn't look great right now but with your help\n I think we can fix this place up! \n\n You: \n\n How can I help?",
                 "Glen:\n\n Well, you see, our town is small and no one here has any\n gardening skills but I've heard you do.\n For the last year I have been proposing to the other members\n of this town that we try to be sustainable.\n Do you know what sustainability is?\n\n You: \n\n Kind of.",
                 "Glen:\n\n We have a library why don't you go check it out and learn\n more about this topic then I will tell you more about\n how you can help save this town.\n\n You: \n\n Okay, It was nice meeting you! ",
                 "Glen:\n\n I see that you checked out our library,\n do you see now why I think sustainability is so important? \n\n You: Yes I do \n\n",
