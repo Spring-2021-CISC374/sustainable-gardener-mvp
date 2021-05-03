@@ -12,12 +12,9 @@ class Townsperson{
         this.y = y;
         this.talking = false;
         this.talkCount = 0; 
-        this.conversations = getScript(name)
-    }
-
-    getscript(name){
+        this.conversations = []
         if (name == "Glenn"){
-            return ["Hello! I have been looking all over for you.\n I am the Mayor and would like to welcome you to our town.\n I know it doesn't look great right now but with your help I think we can fix this place up!",
+            this.conversations ["Hello! I have been looking all over for you.\n I am the Mayor and would like to welcome you to our town.\n I know it doesn't look great right now but with your help I think we can fix this place up!",
              0, 
              "Well, you see, our town is small and no one here has any gardening skills but I've heard you do.\n For the last year I have been proposing to the other members of this town that we try to be sustainable.\n Do you know what sustainability is? ",
              1,
@@ -25,11 +22,11 @@ class Townsperson{
              2,
              "I see that you checked out our library, do you see now why I think sustainability is so important?",
              3,
-             "One thing you can do to help is to grow native plants instead of non-native plants.\n I don't know very much about this subject but if you go ask Darren by the pond he will know more about this subject.\n For now I will give you two seed packs, one is native and one is non-native I'm not sure which is which but hopefully you will plant the right one.",
-
+             "One thing you can do to help is to grow native plants instead of non-native plants.\n I don't know very much about this subject but if you go ask Darren by the pond he will know more about this subject.\n For now I will give you two seed packs, one is native and one is non-native I'm not sure which is which but hopefully you will plant the right one."
             ]; 
-        }else if (name == "Darren"){
-            return [
+        }
+        else if (name == "Darren"){
+            this.conversations = [
                 " Hey there, I haven't met you before have I?",
                 0,
                 "Well then, my name is Darren, what can I do for you?",
@@ -41,6 +38,4 @@ class Townsperson{
             ]; 
         }
     }
-    
-
-}
+}    

@@ -23,6 +23,14 @@ class Town extends Phaser.Scene {
       this.t1.setDepth(2);
       this.t1.id = new Townsperson("t1", this.t1.x, this.t1.y);
 
+      this.t2 = this.physics.add.sprite(1300, 600, "t2");
+      this.t2.play("t2_anim_right", false);
+      this.t2.setInteractive();
+      this.t2.setScale(3);
+      this.cursorKeys = this.input.keyboard.createCursorKeys();
+      this.t2.setCollideWorldBounds(true);
+      this.t2.setDepth(2);
+      this.t2.id = new Townsperson("t2", this.t2.x, this.t2.y);
     }
 
     create(){
@@ -121,6 +129,7 @@ class Town extends Phaser.Scene {
 
     // this.physics.add.collider(this.player, this.t1);
     this.physics.add.overlap(this.player, this.t1, () => {this.canTalk = true}, null, this);
+    this.physics.add.overlap(this.player, this.t2, () => {this.canTalk = true}, null, this);
 
     // this.input.on('pointerdown', function (pointer) {
     //   console.log(pointer.x, pointer.y);
