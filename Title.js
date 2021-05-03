@@ -6,13 +6,13 @@ class Title extends Phaser.Scene {
 
     preload(){
         // this.background = this.add.image("title", "assets/images/title.png");
-        this.background = this.add.image(config.width/2, config.height/2, "title");
-        this.background.setScale(0.7);
+        this.background = this.add.image(config.width* 1/3, config.height* 1/3, "title");
+        this.background.setScale(0.6);
         this.load.bitmapFont("pixelFont", "assets/font/font.png","assets/font/font.xml");
     }
 
     create(){
- //  let title = this.add.image(0,0,"title");
+    //  let title = this.add.image(0,0,"title");
      //   title.setOrigin(0,0);
 
      this.add.text(20, 20, "Sustainable Gardener", {
@@ -29,26 +29,37 @@ class Title extends Phaser.Scene {
     });
 
         //play button
-        const play = this.add.text(750, 780, 'PLAY!', {
-            font: "40px Courier",
+        this.play = this.add.text(830, 480, 'PLAY!', {
+            font: "45px Courier",
             fill: "black" });
-        play.setInteractive({ useHandCursor: true });
-        play.on('pointerdown', () => this.clickButton());
+        this.play.setInteractive({ useHandCursor: true });
+        this.play.on('pointerdown', () => this.clickButton());
+        this.play.on('pointerover', () => this.enterButtonHoverState());
+        this.play.on('pointerout', () => this.enterButtonRestState());
         
 
         //instructions button
-        this.instruction = this.add.text(750, 830, "HOW TO PLAY", {
-            font: "40px Courier",
+        this.instruction = this.add.text(750, 530, "HOW TO PLAY", {
+            font: "45px Courier",
             fill: "black" });
-        this.instruction.tint = "white";
         this.instruction.setInteractive({ useHandCursor: true });
         this.instruction.on('pointerdown', () => this.instructionButton());
     }
+
+    enterButtonHoverState() {
+        this.play.setStyle({ fill: '#ffffff'});
+      }
+
+    enterButtonRestState() {
+        this.clickButton.setStyle({ fill: '#0f0' });
+      }
+
 
     clickButton() {       
         this.scene.start('Home');
         // this.instr.destroy(true);
     }
+
 
     instructionButton(){
         this.instr = this.add.text(680, 750, "You're in a town.", 80);

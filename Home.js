@@ -47,18 +47,18 @@ class Home extends Phaser.Scene {
 	  this.map.setCollisionByProperty({collides: true})
 	  // this.physics.world.setBoundsCollision()
     
-    this.add.text(20, 20, "Sustainable Gardener", {
-      font: "25px Courier",
-      fill: "white",
-      align: "center",
-      shadow: {
-        offsetX: 2,
-        offsetY: 2,
-        color: '#2e2e2e',
-        blur: 5,
-        fill: true
-      }
-    });
+    // this.add.text(20, 20, "Sustainable Gardener", {
+    //   font: "25px Courier",
+    //   fill: "white",
+    //   align: "center",
+    //   shadow: {
+    //     offsetX: 2,
+    //     offsetY: 2,
+    //     color: '#2e2e2e',
+    //     blur: 5,
+    //     fill: true
+    //   }
+    // });
 
     this.gardenArea = this.add.grid(300, 575, 400, 400, 40, 40, 0x604c44)
     this.gardenArea.setDepth(0);
