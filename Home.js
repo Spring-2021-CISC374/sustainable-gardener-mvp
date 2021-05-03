@@ -214,10 +214,10 @@ class Home extends Phaser.Scene {
     }, this);
 
     //inventory stuff
-    this.inventory = this.add.image(config.width/3, config.height/1.5, "inventory");
+    this.inventory = this.add.image(config.width/1.8, config.height/1.5, "inventory");
     this.inventory.setScale(5,3)
 
-    this.container = this.add.container(config.width / 3, config.height / 1.5);
+    this.container = this.add.container(config.width / 1.8, config.height / 1.5);
     this.container.setDepth(2);
 
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
