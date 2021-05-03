@@ -99,13 +99,21 @@ class Town extends Phaser.Scene {
     this.blur.setVisible(false);
 
     //button for exiting speech bubble
-    this.xbutton = this.add.image(1050, 600, 'x_button');
-    this.xbutton.setScale(5,4);
-    this.xbutton.setInteractive();
-    this.xbutton.setVisible(false);
+    // this.xbutton = this.add.image(1050, 600, 'x_button');
+    // this.xbutton.setScale(5,4);
+    // this.xbutton.setInteractive();
+    // this.xbutton.setVisible(false);
+
+    //button for continuing speech
+    this.checkbutton = this.add.image(1050, 600, 'check_button');
+    this.checkbutton.setScale(5,4);
+    this.checkbutton.setInteractive();
+    this.checkbutton.setVisible(false);
+
     
     this.canTalk = false;
-
+    this.personTalking = null;
+      
 
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
@@ -125,7 +133,8 @@ class Town extends Phaser.Scene {
 
     this.input.on('gameobjectdown', this.onClicked.bind(this));
     //this.input.on('pointerdown', this.talk.bind(this));
-    this.xbutton.on('pointerdown', this.hideTextBubble.bind(this));
+    //this.xbutton.on('pointerdown', this.hideTextBubble.bind(this));
+    this.checkbutton.on('pointerdown', this.nextTextBubble.bind(this));
 
     // this.physics.add.collider(this.player, this.t1);
     this.physics.add.overlap(this.player, this.t1, () => {this.canTalk = true}, null, this);
@@ -197,6 +206,7 @@ class Town extends Phaser.Scene {
     }
 
     talk(person){
+      this.personTalking = person;
       if (!this.blur.visible){
         person.id.talking = false;
         this.canTalk = true;
@@ -227,7 +237,7 @@ class Town extends Phaser.Scene {
         person.id.talking = true;
         this.talkScreen.setVisible(true);
         this.blur.setVisible(true);
-        this.xbutton.setVisible(true);
+        this.checkbutton.setVisible(true);
         this.convo = this.add.text(300, 410, text, {
           font: "20px Courier",
           fill: "0x995f40",
@@ -243,8 +253,18 @@ class Town extends Phaser.Scene {
     hideTextBubble(){
       this.talkScreen.setVisible(false);
       this.blur.setVisible(false);
-      this.xbutton.setVisible(false);
+      this.checkbutton.setVisible(false);
       this.convo.setVisible(false);
+    }
+
+    nextTextBubble(){
+      this.talkScreen.setVisible(false);
+      this.blur.setVisible(false);
+      this.checkbutton.setVisible(false);
+      this.convo.setVisible(false);
+      if (this.personTalking != null){
+        this.talk(this.personTalking)
+      }
     }
 
     showTaskList() {
