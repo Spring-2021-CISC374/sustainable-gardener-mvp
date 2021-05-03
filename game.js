@@ -15,7 +15,7 @@ var config = {
   
 var app = {
   inventoryArr: [],
-  itemArr: []
+  itemArr: [],
 }
 
 

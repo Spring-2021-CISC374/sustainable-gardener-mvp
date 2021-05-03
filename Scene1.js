@@ -34,6 +34,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image("sunflower_seeds", "assets/sunflower_seeds.png");
         this.load.image("sunflower_seeds_inv", "assets/sunflower_seeds_inv.png");
         this.load.image("inventory", "assets/inventory.png");
+        this.load.image("textbubble", "assets/textbubble.png");
+        this.load.image('x_button', "assets/x.png");
 
         //player sprites
         this.load.spritesheet("player_left", "assets/player_left.png", {
@@ -54,7 +56,7 @@ class Scene1 extends Phaser.Scene {
         });
 
         //townsperson1 (t1) sprites
-        this.load.spritesheet("t1_left", "assets/Townsperson1_left.png", {
+        this.load.spritesheet("t1_left", "assets/t1_left.png", {
             frameWidth: 16,
             frameHeight: 18
         });
@@ -62,11 +64,19 @@ class Scene1 extends Phaser.Scene {
             frameWidth: 16,
             frameHeight: 18
         });
-        this.load.spritesheet("t1_up", "assets/Townsperson1_up.png", {
+        this.load.spritesheet("t1_up", "assets/t1_up.png", {
             frameWidth: 16,
             frameHeight: 18
         });
-        this.load.spritesheet("t1_right", "assets/Townsperson1_right.png", {
+        this.load.spritesheet("t1_right", "assets/t1_right.png", {
+            frameWidth: 16,
+            frameHeight: 18
+        });
+        this.load.spritesheet("t1_stand_left", "assets/t1_stand_left.png", {
+            frameWidth: 16,
+            frameHeight: 18
+        });
+        this.load.spritesheet("t1_stand_right", "assets/t1_stand_right.png", {
             frameWidth: 16,
             frameHeight: 18
         });
@@ -133,6 +143,20 @@ class Scene1 extends Phaser.Scene {
             frameRate: 10,
             repeat: 0
         });
+        this.anims.create({
+            key: "t1_anim_stand_left",
+            frames: this.anims.generateFrameNames("t1_stand_left", {start: 1}),
+            frameRate: 10,
+            repeat: 0
+        });
+        this.anims.create({
+            key: "t1_anim_stand_right",
+            frames: this.anims.generateFrameNames("t1_stand_right", {start: 1}),
+            frameRate: 10,
+            repeat: 0
+        });
     }
+
+    
 
 }
