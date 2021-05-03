@@ -71,8 +71,16 @@ class Town extends Phaser.Scene {
     this.inventory = this.add.image(config.width/1.8, config.height/1.5, "inventory");
     this.inventory.setScale(5,3)
 
-    this.container = this.add.container(config.width / 1.8, config.height / 1.15);
-    this.container.setDepth(2);
+    this.container = this.add.container(config.width / 1.8, config.height / 1.5);
+      this.container.setDepth(2);
+
+      var x = 10;
+      for (var i = 0; i < app.inventoryArr.length; i++){
+        var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+        this.container.add(sprite);
+        x = x + 64;
+      }
+      
 
     // popup for talking to person
     this.blur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
@@ -117,6 +125,7 @@ class Town extends Phaser.Scene {
     // this.input.on('pointerdown', function (pointer) {
     //   console.log(pointer.x, pointer.y);
     // });
+    console.log(app.inventoryArr)
 
   }
 
@@ -171,8 +180,6 @@ class Town extends Phaser.Scene {
   
     showInventory() {
     
-      var o = this.input.keyboard.addKey("o");
-      
       if (Phaser.Input.Keyboard.JustDown(this.i)) {
         this.container.setVisible(!this.container.visible);
         this.inventory.setVisible(!this.inventory.visible);
@@ -266,6 +273,8 @@ class Town extends Phaser.Scene {
         this.container.add(sprite);
         x = x + 64;
       }
+
+  
 
     }
 

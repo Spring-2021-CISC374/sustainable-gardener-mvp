@@ -47,7 +47,7 @@ class Title extends Phaser.Scene {
 
     clickButton() {       
         this.scene.start('Home');
-        this.instr.destroy(true);
+        // this.instr.destroy(true);
     }
 
     instructionButton(){
