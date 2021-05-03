@@ -196,7 +196,6 @@ class Home extends Phaser.Scene {
       if (pointer.rightButtonDown()) {
         this.add.image(pointer.x, pointer.y, 'hose');
         this.checkmark3.setVisible(true);
-        // this.add.text(20, 20, "Right Button Clicked", { font: "25px Arial", fill: "black" });
       }
       else if(pointer.leftButtonDown()){
         for(var i = 0; i < this.plants.length; i ++){
