@@ -128,13 +128,13 @@ class Scene1 extends Phaser.Scene {
         });
         this.anims.create({
             key: "player_anim_up",
-            frames: this.anims.generateFrameNames('player_up', {start: 1}),
+            frames: this.anims.generateFrameNames('player_up', {start: 4, end: 0}),
             frameRate: 10,
             repeat: 0
         });
         this.anims.create({
             key: "player_anim_down",
-            frames: this.anims.generateFrameNames('player_down', {start: 1}),
+            frames: this.anims.generateFrameNames('player_down', {start: 4, end: 0}),
             frameRate: 10,
             repeat: 0
         });
