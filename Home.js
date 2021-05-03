@@ -301,8 +301,6 @@ class Home extends Phaser.Scene {
   }
 
   showInventory() {
-    var o = this.input.keyboard.addKey("o");
-    
     if (Phaser.Input.Keyboard.JustDown(this.i)) {
       this.container.setVisible(!this.container.visible);
       this.inventory.setVisible(!this.inventory.visible);
