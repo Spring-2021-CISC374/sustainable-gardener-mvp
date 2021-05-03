@@ -83,6 +83,23 @@ class Scene1 extends Phaser.Scene {
             frameHeight: 18
         });
 
+        //townsperson1 (t2) sprites
+        this.load.spritesheet("t2_left", "assets/t2_left.png", {
+            frameWidth: 30,
+            frameHeight: 30
+        });
+        this.load.spritesheet("t2_down", "assets/t2_down.png", {
+            frameWidth: 16,
+            frameHeight: 18
+        });
+        this.load.spritesheet("t2_up", "assets/t2_up.png", {
+            frameWidth: 16,
+            frameHeight: 18
+        });
+        this.load.spritesheet("t2_right", "assets/t2_right.png", {
+            frameWidth: 16,
+            frameHeight: 19
+        });
 
         
        this.load.image("shovel", "assets/images/shovel.png");
@@ -157,7 +174,45 @@ class Scene1 extends Phaser.Scene {
             frameRate: 10,
             repeat: 0
         });
-    }
+
+    //townsperson2 animation
+    this.anims.create({
+        key: "t2_anim_left",
+        frames: this.anims.generateFrameNames("t2_left", {start: 1}),
+        frameRate: 10,
+        repeat: 0
+    });
+    this.anims.create({
+        key: "t2_anim_right",
+        frames: this.anims.generateFrameNames("t2_right", {start: 1}),
+        frameRate: 10,
+        repeat: 0
+    });
+    this.anims.create({
+        key: "t2_anim_up",
+        frames: this.anims.generateFrameNames("t2_up", {start: 1}),
+        frameRate: 10,
+        repeat: 0
+    });
+    this.anims.create({
+        key: "t2_anim_down",
+        frames: this.anims.generateFrameNames("t2_down", {start: 1}),
+        frameRate: 10,
+        repeat: 0
+    });
+    this.anims.create({
+        key: "t2_anim_stand_left",
+        frames: this.anims.generateFrameNames("t2_left", {start: 1}),
+        frameRate: 10,
+        repeat: 0
+    });
+    this.anims.create({
+        key: "t2_anim_stand_right",
+        frames: this.anims.generateFrameNames("t2_right", {start: 1}),
+        frameRate: 10,
+        repeat: 0
+    });
+}
 
     
 
