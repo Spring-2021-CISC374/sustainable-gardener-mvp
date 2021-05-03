@@ -47,18 +47,18 @@ class Home extends Phaser.Scene {
 	  this.map.setCollisionByProperty({collides: true})
 	  // this.physics.world.setBoundsCollision()
     
-    this.add.text(20, 20, "Sustainable Gardener", {
-      font: "25px Courier",
-      fill: "white",
-      align: "center",
-      shadow: {
-        offsetX: 2,
-        offsetY: 2,
-        color: '#2e2e2e',
-        blur: 5,
-        fill: true
-      }
-    });
+    // this.add.text(20, 20, "Sustainable Gardener", {
+    //   font: "25px Courier",
+    //   fill: "white",
+    //   align: "center",
+    //   shadow: {
+    //     offsetX: 2,
+    //     offsetY: 2,
+    //     color: '#2e2e2e',
+    //     blur: 5,
+    //     fill: true
+    //   }
+    // });
 
     this.gardenArea = this.add.grid(300, 575, 400, 400, 40, 40, 0x604c44)
     this.gardenArea.setDepth(0);
@@ -194,8 +194,8 @@ class Home extends Phaser.Scene {
     this.input.on('pointerdown', function (pointer) {
 
       if (pointer.rightButtonDown()) {
-        this.add.image(pointer.x, pointer.y, 'hose');
-        this.checkmark3.setVisible(true);
+        // this.add.image(pointer.x, pointer.y, 'hose');
+        // this.checkmark3.setVisible(true);
       }
       else if(pointer.leftButtonDown()){
         for(var i = 0; i < this.plants.length; i ++){
@@ -223,6 +223,12 @@ class Home extends Phaser.Scene {
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
     this.t = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+    var x = 10;
+    for (var i = 0; i < app.inventoryArr.length; i++){
+      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+      this.container.add(sprite);
+      x = x + 64;
+    }
 
 
     //add a listener to the scene, this will pass the object clicked to the function
@@ -355,8 +361,7 @@ class Home extends Phaser.Scene {
 
     var x = -230;
     for (var i = 0; i < app.inventoryArr.length; i++){
-      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key);
-      sprite.setScale(0.2);
+      var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
       this.container.add(sprite);
       sprite.setInteractive();
       sprite.inventory = true;
