@@ -31,6 +31,7 @@ class Town extends Phaser.Scene {
       this.t2.setCollideWorldBounds(true);
       this.t2.setDepth(2);
       this.t2.id = new Townsperson("Darren", this.t2.x, this.t2.y);
+      this.t2.setVisible(false);
     }
 
     create(){
@@ -53,26 +54,23 @@ class Town extends Phaser.Scene {
       this.paper = this.add.image(config.width/1.5, config.height/6, "scroll");
       this.paper.setScale(0.25);
       this.add.text(1200, 80, "Task List:",{fill:"#000000", fontSize:"25px"});
-      this.add.text(1200,115, "- Find and speak to a member \n from your town",{fill:"#000000", fontSize:"9px"});
+      this.add.text(1200,115, "- Find and speak to \n a member of the town",{fill:"#000000", fontSize:"15px"});
       // this.add.text(1200,175, "- Click on the shovel to pick \n it up",{fill:"#000000", fontSize:"9px"});
       // this.add.text(1200,200, "- Right click to put down or \n drop an object",{fill:"#000000", fontSize:"9px"});
       // this.add.text(1200,230, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
       // this.add.text(1200,270, "- Now continue walking down the \n  road to get to the town \n  from your home",{fill:"#000000", fontSize:"9px"});
     
     // checkmark for speaking to townsperson
-      this.checkmark1 = this.add.image(1190, 115, "checkmark").setVisible(false);
-      this.checkmark1.setScale(.025);
+    this.checkmark1 = this.add.image(1190, 115, "checkmark").setVisible(false);
+    this.checkmark1.setScale(.025);
 
-    // // checkmark for picking up shovel
-    // this.checkmark2 = this.add.image(1190, 175, "checkmark").setVisible(false);
-    // this.checkmark2.setScale(.025);
+    this.wateringCan = this.add.sprite(150, 750, "watering_can");
+    this.wateringCan.setScale(0.3);
+    this.wateringCan.setInteractive();
+    this.wateringCan.setVisible(false);  
 
-    // // checkmark for putting down hose
-    // this.checkmark3 = this.add.image(1190, 200, "checkmark").setVisible(false);
-    // this.checkmark3.setScale(.025);    
-
-      this.container1 = this.add.container(config.width/3, config.height/1.15);
-      this.container1.setDepth(2);
+    this.container1 = this.add.container(config.width/3, config.height/1.15);
+    this.container1.setDepth(2);
         
     //inventory stuff
 
@@ -82,7 +80,15 @@ class Town extends Phaser.Scene {
     this.container = this.add.container(config.width / 1.8, config.height / 1.5);
     this.container.setDepth(2);
 
-      
+    //update inventory
+    var x = -230;
+      for (var i = 0; i < app.inventoryArr.length; i++){
+        var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+        this.container.add(sprite);
+        sprite.setInteractive();
+        sprite.inventory = true;
+        x = x + 64;
+      }
 
     // popup for talking to person
     this.blur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
@@ -151,15 +157,8 @@ class Town extends Phaser.Scene {
       this.movePlayer();
     }
 
-    //update inventory
-    var x = -230;
-      for (var i = 0; i < app.inventoryArr.length; i++){
-        var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
-        this.container.add(sprite);
-        sprite.setInteractive();
-        sprite.inventory = true;
-        x = x + 64;
-      }
+    this.highlightItem();
+    
   }
 
   //pointer is the mouse that triggered the event
@@ -168,6 +167,10 @@ class Town extends Phaser.Scene {
 
     if(this.canTalk && (objectClicked.texture.key.includes('t1') || objectClicked.texture.key.includes("t2"))){
       this.talk(objectClicked);
+    }
+    else if(objectClicked.texture.key.includes("watering_can")){
+      this.addItemtoInventory(objectClicked);
+      objectClicked.destroy();
     }
     // if (!objectClicked.texture.key.includes("player")) {
     //   this.addItemtoInventory(objectClicked);
@@ -217,6 +220,7 @@ class Town extends Phaser.Scene {
       }
       console.log("person", person)
       if(this.canTalk){
+        this.checkmark1.setVisible(true);
         this.canTalk = false;
         if(this.player.x > person.x){
           person.play(person.id.name+"_anim_stand_right");
@@ -251,6 +255,10 @@ class Town extends Phaser.Scene {
         if(person.id.talkCount === 4 && person.id.name === "Glenn"){
           this.dropSeeds("english_ivy");
           this.dropSeeds("sunflower");
+          this.t2.setVisible(true);
+        }
+        else if(person.id.talkCount === 6 && person.id.name === "Darren"){
+          this.wateringCan.setVisible(true);
         }
       }
     }
@@ -281,13 +289,13 @@ class Town extends Phaser.Scene {
       } 
     }
   
-    highlightItem(item) {
-      item.on('pointerover', () => {
-        item.alpha = 0.5;
+    highlightItem() {
+      this.wateringCan.on('pointerover', () => {
+        this.wateringCan.alpha = 0.5;
       })
   
-      item.on('pointerout', () => {
-        item.alpha = 1;
+      this.wateringCan.on('pointerout', () => {
+        this.wateringCan.alpha = 1;
       })
     }
   
@@ -303,15 +311,12 @@ class Town extends Phaser.Scene {
         app.inventoryArr.push(object)
       }
   
-      // var x = -230;
-      // for (var i = 0; i < app.inventoryArr.length; i++){
-      //   var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
-      //   this.container.add(sprite);
-      //   x = x + 64;
-      // }
-
-  
-
+      var x = -230;
+      for (var i = 0; i < app.inventoryArr.length; i++){
+        var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+        this.container.add(sprite);
+        x = x + 64;
+      }
     }
 
     dropSeeds(name){
