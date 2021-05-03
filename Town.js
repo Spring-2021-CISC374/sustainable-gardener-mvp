@@ -82,12 +82,6 @@ class Town extends Phaser.Scene {
     this.container = this.add.container(config.width / 1.8, config.height / 1.5);
     this.container.setDepth(2);
 
-      var x = 10;
-      for (var i = 0; i < app.inventoryArr.length; i++){
-        var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
-        this.container.add(sprite);
-        x = x + 64;
-      }
       
 
     // popup for talking to person
@@ -156,6 +150,16 @@ class Town extends Phaser.Scene {
     else{
       this.movePlayer();
     }
+
+    //update inventory
+    var x = -230;
+      for (var i = 0; i < app.inventoryArr.length; i++){
+        var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+        this.container.add(sprite);
+        sprite.setInteractive();
+        sprite.inventory = true;
+        x = x + 64;
+      }
   }
 
   //pointer is the mouse that triggered the event
@@ -244,8 +248,9 @@ class Town extends Phaser.Scene {
           align: "left"}
         );
         this.convo.setVisible(true);
-        if(person.id.talkCount === 1){
-          this.dropSeeds();
+        if(person.id.talkCount === 4 && person.id.name === "Glenn"){
+          this.dropSeeds("english_ivy");
+          this.dropSeeds("sunflower");
         }
       }
     }
@@ -298,20 +303,19 @@ class Town extends Phaser.Scene {
         app.inventoryArr.push(object)
       }
   
-      var x = 10;
-      for (var i = 0; i < app.inventoryArr.length; i++){
-        var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
-        this.container.add(sprite);
-        x = x + 64;
-      }
+      // var x = -230;
+      // for (var i = 0; i < app.inventoryArr.length; i++){
+      //   var sprite = this.add.sprite(x, 0, app.inventoryArr[i].texture.key+"_inv");
+      //   this.container.add(sprite);
+      //   x = x + 64;
+      // }
 
   
 
     }
 
-    dropSeeds(){
-      console.log('adding seeds')
-      var seeds = this.add.sprite(0, 0, "sunflower_seeds");
+    dropSeeds(name){
+      var seeds = this.add.sprite(0, 0, name+"_seeds");
       seeds.setDepth(3);
       seeds.setInteractive();
       app.itemArr.push(seeds);
