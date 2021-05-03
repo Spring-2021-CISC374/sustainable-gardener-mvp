@@ -21,7 +21,7 @@ class Town extends Phaser.Scene {
       this.cursorKeys = this.input.keyboard.createCursorKeys();
       this.t1.setCollideWorldBounds(true);
       this.t1.setDepth(2);
-      this.t1.id = new Townsperson("t1", this.t1.x, this.t1.y);
+      this.t1.id = new Townsperson("Glenn", this.t1.x, this.t1.y);
 
       this.t2 = this.physics.add.sprite(1300, 600, "t2");
       this.t2.play("t2_anim_right", false);
@@ -30,7 +30,7 @@ class Town extends Phaser.Scene {
       this.cursorKeys = this.input.keyboard.createCursorKeys();
       this.t2.setCollideWorldBounds(true);
       this.t2.setDepth(2);
-      this.t2.id = new Townsperson("t2", this.t2.x, this.t2.y);
+      this.t2.id = new Townsperson("Darren", this.t2.x, this.t2.y);
     }
 
     create(){
@@ -93,7 +93,7 @@ class Town extends Phaser.Scene {
     // popup for talking to person
     this.blur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
     this.talkScreen = this.add.image(750, 500, "textbubble");
-    this.talkScreen.setScale(5,4)
+    this.talkScreen.setScale(12,10)
     this.talkScreen.text = '';
     this.talkScreen.setVisible(false);
     this.blur.setVisible(false);
@@ -227,7 +227,7 @@ class Town extends Phaser.Scene {
       this.blur.setVisible(true);
       this.xbutton.setVisible(true);
       var text = person.id.conversations[person.id.talkCount];
-      this.convo = this.add.text(550, 350, text, {
+      this.convo = this.add.text(250, 150, text, {
         font: "25px Courier",
         fill: "0x995f40",
         align: "left"}
