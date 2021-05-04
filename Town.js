@@ -54,7 +54,7 @@ class Town extends Phaser.Scene {
       this.paper = this.add.image(config.width/1.5, config.height/6, "scroll");
       this.paper.setScale(0.25);
       this.add.text(1200, 80, "Task List:",{fill:"#000000", fontSize:"25px"});
-      this.add.text(1200,115, "- Find and speak to \n a member of the town",{fill:"#000000", fontSize:"15px"});
+      this.add.text(1200,115, "- Find and speak to \n a member of the town. \n When you are close, \n click on the  \n townsperson to begin  \n speaking to them.",{fill:"#000000", fontSize:"15px"});
       // this.add.text(1200,175, "- Click on the shovel to pick \n it up",{fill:"#000000", fontSize:"9px"});
       // this.add.text(1200,200, "- Right click to put down or \n drop an object",{fill:"#000000", fontSize:"9px"});
       // this.add.text(1200,230, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
