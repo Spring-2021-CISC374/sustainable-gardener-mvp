@@ -116,7 +116,7 @@ class Town extends Phaser.Scene {
     this.checkbutton.setVisible(false);
 
     //button for Library Door
-    this.doorbutton = this.add.image(250, 210, 'door_button');
+    this.doorbutton = this.add.image(235, 215, 'door_button');
     this.doorbutton.scale = 0.75;
     this.doorbutton.setInteractive();
     this.doorbutton.setVisible(true);
