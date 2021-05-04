@@ -257,6 +257,32 @@ class Home extends Phaser.Scene {
         left: Phaser.Input.Keyboard.KeyCodes.A,
         right: Phaser.Input.Keyboard.KeyCodes.D
     });
+
+    //endgame popup
+    this.blur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
+    this.talkScreen = this.add.image(750, 500, "textbubble");
+    this.talkScreen.setScale(8,6)
+    this.talkScreen.text = '';
+    this.talkScreen.setVisible(false);
+    this.blur.setVisible(false);
+    this.blur.setDepth(3);
+    this.talkScreen.setDepth(3);
+    this.winText = this.add.text(300, 410, 
+      "You Win! \n\n You planted the native plant and started the town on its sustainability journey! \n\n",
+      {fill:"#995f40", fontSize:"20px"});
+    this.loseText = this.add.text(290, 410, 
+      "Try again next time! \n\n You planted the invasive plant :( \n\n",
+      {fill:"#995f40", align: "center", fontSize:"20px"});
+    this.restartButton = this.add.text(290, 500, "PLAY AGAIN", 
+    {fill:"#995f40", align: "center", fontSize:"20px"});
+    this.winText.setVisible(false);
+    this.loseText.setVisible(false);
+    this.restartButton.on('pointerdown', this.resetGame.bind(this));
+    this.restartButton.setVisible(false);
+    this.winText.setDepth(3);
+    this.loseText.setDepth(3);
+    this.restartButton.setDepth(3);
+
   }
 
   //pointer is the mouse that triggered the event
@@ -406,14 +432,25 @@ class Home extends Phaser.Scene {
   }
 
   endgame(win){
+    this.blur.setVisible(true);
+    this.talkScreen.setVisible(true);
+    this.restartButton.setVisible(true);
+    this.restartButton.setInteractive();
     if(win){
       console.log('you won!');
-      //this.scene.start('Endgame_win');
+      this.winText.setVisible(true);
     }
     else{
       console.log('you lose!');
-      //this.scene.start("Endgame_lose");
+      this.loseText.setVisible(true);
     }
+  }
+
+  resetGame(){
+    app.inventoryArr = [];
+    app.itemArr = [];
+    app.currentItem = null;
+    this.scene.start('Home');
   }
 
 

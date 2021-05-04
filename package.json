@@ -9,7 +9,12 @@
     "shortName": "SustainableGardener",
     "name": "Sustainable Gardener"
   },
-  "contributors": ["Kate Bagshaw kbagshaw@udel.edu (https://github.com/kebagshaw)", "Adheena Chacko amchacko@udel.edu (https://github.com/amchacko)", "Hajera Chaudhri hajerach@udel.edu (https://github.com/HajeraCh)", "Emily Oldham owlanne@udel.edu (https://github.com/Eoldham)"],
+  "contributors": [
+    "Kate Bagshaw kbagshaw@udel.edu (https://github.com/kebagshaw)",
+    "Adheena Chacko amchacko@udel.edu (https://github.com/amchacko)",
+    "Hajera Chaudhri hajerach@udel.edu (https://github.com/HajeraCh)",
+    "Emily Oldham owlanne@udel.edu (https://github.com/Eoldham)"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Spring-2021-CISC374/sustainable-gardener-mvp.git"
