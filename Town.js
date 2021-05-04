@@ -32,6 +32,7 @@ class Town extends Phaser.Scene {
       this.t2.setDepth(2);
       this.t2.id = new Townsperson("Darren", this.t2.x, this.t2.y);
       this.t2.setVisible(false);
+
     }
 
     create(){
@@ -54,7 +55,7 @@ class Town extends Phaser.Scene {
       this.paper = this.add.image(config.width/1.5, config.height/6, "scroll");
       this.paper.setScale(0.25);
       this.add.text(1200, 80, "Task List:",{fill:"#000000", fontSize:"25px"});
-      this.add.text(1200,115, "- Find and speak to \n a member of the town",{fill:"#000000", fontSize:"15px"});
+      this.add.text(1200,115, "- Find and speak to \n a member of the town. \n When you are close, \n click on the  \n townsperson to begin  \n speaking to them.",{fill:"#000000", fontSize:"15px"});
       // this.add.text(1200,175, "- Click on the shovel to pick \n it up",{fill:"#000000", fontSize:"9px"});
       // this.add.text(1200,200, "- Right click to put down or \n drop an object",{fill:"#000000", fontSize:"9px"});
       // this.add.text(1200,230, "- Walk up to your garden and \n  click on the dirt to \n  grow a plant",{fill:"#000000", fontSize:"9px"});
@@ -98,18 +99,47 @@ class Town extends Phaser.Scene {
     this.talkScreen.setVisible(false);
     this.blur.setVisible(false);
 
-    //button for exiting speech bubble
-    // this.xbutton = this.add.image(1050, 600, 'x_button');
-    // this.xbutton.setScale(5,4);
-    // this.xbutton.setInteractive();
-    // this.xbutton.setVisible(false);
+    // popup for library
+    this.libblur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
+    this.libScreen = this.add.image(750, 500, "textbubble");
+    this.libScreen.setScale(8,6)
+    this.libScreen.text = '';
+    this.libScreen.setVisible(false);
+    this.libblur.setVisible(false);
 
     //button for continuing speech
-    this.checkbutton = this.add.image(1050, 600, 'check_button');
+    this.checkbutton = this.add.image(1150, 550, 'check_button');
     this.checkbutton.setScale(5,4);
     this.checkbutton.setInteractive();
     this.checkbutton.setVisible(false);
 
+    //button for Library Door
+    this.doorbutton = this.add.image(235, 215, 'door_button');
+    this.doorbutton.scale = 0.75;
+    this.doorbutton.setInteractive();
+    this.doorbutton.setVisible(true);
+
+    //Library buttons
+    this.susbutton = this.add.image(400, 550, 'sus_button');
+    this.susbutton.setScale(5,4);
+    this.susbutton.setInteractive();
+    this.susbutton.setVisible(false);
+
+    this.sunbutton = this.add.image(750, 550, 'sunflower_button');
+    this.sunbutton.setScale(5,4);
+    this.sunbutton.setInteractive();
+    this.sunbutton.setVisible(false);
+
+    this.ivybutton = this.add.image(1100, 550, 'ivy_button');
+    this.ivybutton.setScale(5,4);
+    this.ivybutton.setInteractive();
+    this.ivybutton.setVisible(false); 
+
+    //button for exiting speech bubble
+    this.xbutton = this.add.image(1200, 450, 'x_button');
+    this.xbutton.setScale(5,4);
+    this.xbutton.setInteractive();
+    this.xbutton.setVisible(false);
     
     this.canTalk = false;
     this.personTalking = null;
@@ -133,8 +163,12 @@ class Town extends Phaser.Scene {
 
     this.input.on('gameobjectdown', this.onClicked.bind(this));
     //this.input.on('pointerdown', this.talk.bind(this));
-    //this.xbutton.on('pointerdown', this.hideTextBubble.bind(this));
+    this.xbutton.on('pointerdown', this.leaveLibrary.bind(this));
     this.checkbutton.on('pointerdown', this.nextTextBubble.bind(this));
+    this.doorbutton.on('pointerdown', this.libraryEntered.bind(this));
+    this.susbutton.on('pointerdown', this.suslibraryText.bind(this));
+    this.sunbutton.on('pointerdown', this.sunlibraryText.bind(this));
+    this.ivybutton.on('pointerdown', this.ivylibraryText.bind(this));
 
     // this.physics.add.collider(this.player, this.t1);
     this.physics.add.overlap(this.player, this.t1, () => {this.canTalk = true}, null, this);
@@ -171,6 +205,12 @@ class Town extends Phaser.Scene {
     else if(objectClicked.texture.key.includes("watering_can")){
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
+    // } else if(objectClicked.texture.key.includes("sus_button")){
+    //     this.libraryText("sus");
+    // } else if(objectClicked.texture.key.includes("sunflower_button")){
+    //     this.libraryText("sun")
+    // } else if (objectClicked.texture.key.includes("ivy_button")){
+    //     this.libraryText("ivy")
     }
     // if (!objectClicked.texture.key.includes("player")) {
     //   this.addItemtoInventory(objectClicked);
@@ -252,7 +292,7 @@ class Town extends Phaser.Scene {
           align: "left"}
         );
         this.convo.setVisible(true);
-        if(person.id.talkCount === 4 && person.id.name === "Glenn"){
+        if(person.id.talkCount === 3 && person.id.name === "Glenn"){
           this.dropSeeds("english_ivy");
           this.dropSeeds("sunflower");
           this.t2.setVisible(true);
@@ -275,9 +315,108 @@ class Town extends Phaser.Scene {
       this.blur.setVisible(false);
       this.checkbutton.setVisible(false);
       this.convo.setVisible(false);
-      if (this.personTalking != null){
-        this.talk(this.personTalking)
+      if (this.personTalking != null ){
+        if (this.personTalking.id.talkcount === 2 && this.personTalking.id.name ==="Glenn"){ 
+        }else{
+          this.talk(this.personTalking)
+        }
       }
+    }
+
+    libraryEntered(){
+      var text = "Welcome to the library!\n\n Click on the subject you want to learn about";
+      if(!!text){
+        this.libScreen.setVisible(true);
+        this.libblur.setVisible(true);
+        this.sunbutton.setVisible(true);
+        this.ivybutton.setVisible(true);
+        this.susbutton.setVisible(true);
+        this.xbutton.setVisible(true);
+        this.convo = this.add.text(300, 410, text, {
+          font: "20px Courier",
+          fill: "0x995f40",
+          align: "left"}
+        );
+        this.convo.setVisible(true);
+      }
+    }
+
+    sunlibraryText(){
+      //Get rid of previous screen
+      this.libScreen.setVisible(false);
+      this.libblur.setVisible(false);
+      this.sunbutton.setVisible(false);
+      this.ivybutton.setVisible(false);
+      this.susbutton.setVisible(false);
+      this.xbutton.setVisible(false);
+      this.convo.setVisible(false);
+
+      var text = "The Giant Sunflower also known as Helianthus giganteus\n is a native plant and blooms in summer.\n It attracts pollinators like bees."
+      this.convo = this.add.text(300, 410, text, {
+        font: "20px Courier",
+        fill: "0x995f40",
+        align: "left"}
+      );
+      this.convo.setVisible(true);
+      this.xbutton.setVisible(true);
+      this.libScreen.setVisible(true);
+      this.libblur.setVisible(true);
+    }
+
+      ivylibraryText(){
+        //Get rid of previous screen
+        this.libScreen.setVisible(false);
+        this.libblur.setVisible(false);
+        this.sunbutton.setVisible(false);
+        this.ivybutton.setVisible(false);
+        this.susbutton.setVisible(false);
+        this.xbutton.setVisible(false);
+        this.convo.setVisible(false);
+
+        var text = "English Ivy also known as Hedera Helix\n is a vining plant that is not native to this region.\n This plant is actually invasive.";
+
+        this.convo = this.add.text(300, 410, text, {
+          font: "20px Courier",
+          fill: "0x995f40",
+          align: "left"}
+        );
+        this.convo.setVisible(true);
+        this.xbutton.setVisible(true);
+        this.libScreen.setVisible(true);
+        this.libblur.setVisible(true);
+      }
+
+        suslibraryText(){
+          //Get rid of previous screen
+          this.libScreen.setVisible(false);
+          this.libblur.setVisible(false);
+          this.sunbutton.setVisible(false);
+          this.ivybutton.setVisible(false);
+          this.susbutton.setVisible(false);
+          this.xbutton.setVisible(false);
+          this.convo.setVisible(false);
+          var text = "Sustainability is based on a simple principle:\n Everything that we need for our survival and well-being\n depends, either directly or indirectly, on our natural environment.\n To pursue sustainability is to create and maintain the conditions\n under which humans and nature can exist in productive\n harmony to support present and future generations."; 
+          this.convo = this.add.text(300, 410, text, {
+            font: "20px Courier",
+            fill: "0x995f40",
+            align: "left"}
+          );
+
+      this.convo.setVisible(true);
+      this.xbutton.setVisible(true);
+      this.libScreen.setVisible(true);
+      this.libblur.setVisible(true);
+    }
+
+
+    leaveLibrary(){
+      this.libScreen.setVisible(false);
+      this.libblur.setVisible(false);
+      this.sunbutton.setVisible(false);
+      this.ivybutton.setVisible(false);
+      this.susbutton.setVisible(false);
+      this.xbutton.setVisible(false);
+      this.convo.setVisible(false);
     }
 
     showTaskList() {

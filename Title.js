@@ -62,7 +62,7 @@ class Title extends Phaser.Scene {
 
 
     instructionButton(){
-        this.instr = this.add.text(680, 750, "You're in a town.", 80);
+        this.instr = this.add.text(680, 590, " You recently moved into a new \n town and they need your help! \n Explore your new neighborhood, \n make new friends, and help \n the town by harvesting \n sustainable plants!", 110);
         this.instr.tint = 0x000000;
     }
 

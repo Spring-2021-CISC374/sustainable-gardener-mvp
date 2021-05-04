@@ -164,7 +164,7 @@ class Home extends Phaser.Scene {
       this.paper = this.add.image(config.width/1.5, config.height/5, "scroll");
       this.paper.setScale(0.25);
       this.add.text(1200,100, "Task List:",{fill:"#000000", fontSize:"25px"});
-      this.add.text(1200, 150, "- Grow some \n native plants!", { fill: "#000000", fontSize: "15px" });
+      this.add.text(1200, 150, "- Grow some \n native plants! \n Walk over to your \n garden, click on the \n seeds you want to \n use and click on \n your garden again \n to plant. Use the \n watering can to \n water your plants\n until they're \n harvested!", { fill: "#000000", fontSize: "15px" });
     }
     
     this.container1 = this.add.container(config.width/3, config.height/1.15);
