@@ -17,8 +17,7 @@ class Townsperson{
             this.conversations = [
                 "Glenn:\n Hello! I have been looking all over for you.\n I am the Mayor and would like to welcome you to our town.\n I know it doesn't look great right now but with your help\n I think we can fix this place up! \n\nYou:\n How can I help?",
                 "Glenn:\n Well, you see, our town is small and no one here has any\n gardening skills but I've heard you do.\n For the last year I have been proposing to the other members\n of this town that we try to be sustainable.\n Do you know what sustainability is?\n\nYou:\n Kind of.",
-                "Glenn:\n Have you visited our library yet? Why don't you go check it out and learn\n more about this topic then I will tell you more about\n how you can help save this town.\n The library is the building behind me.\n\nYou:\n Okay, It was nice meeting you! ",
-                "Glenn:\n I see that you checked out our library,\n do you see now why I think sustainability is so important? \n\nYou: Yes I do",
+                "Glenn:\n Have you visited our library yet? Why don't you go check it out and learn\n more about sustainability after I tell you how you can help.",
                 "Glenn:\n One thing you can do to help is to grow native plants instead of non-native \n plants. I don't know very much about this subject, but if you go\n ask Darren by the pond he will know more about this subject.\n For now, I will give you two seed packs. One is native and one is non-native. \n I'm not sure which is which but hopefully you will plant the right one."
             ]; 
         }
