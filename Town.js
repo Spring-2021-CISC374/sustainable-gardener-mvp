@@ -33,8 +33,6 @@ class Town extends Phaser.Scene {
       this.t2.id = new Townsperson("Darren", this.t2.x, this.t2.y);
       this.t2.setVisible(false);
 
-      //Create Library
-      //this.library.id = new Library();
     }
 
     create(){
@@ -168,9 +166,9 @@ class Town extends Phaser.Scene {
     this.xbutton.on('pointerdown', this.leaveLibrary.bind(this));
     this.checkbutton.on('pointerdown', this.nextTextBubble.bind(this));
     this.doorbutton.on('pointerdown', this.libraryEntered.bind(this));
-    this.susbutton.on('pointerdown', this.libraryText.bind(this));
-    this.sunbutton.on('pointerdown', this.libraryText.bind(this));
-    this.ivybutton.on('pointerdown', this.libraryText.bind(this));
+    this.susbutton.on('pointerdown', this.onClicked.bind(this));
+    this.sunbutton.on('pointerdown', this.onClicked.bind(this));
+    this.ivybutton.on('pointerdown', this.onClicked.bind(this));
 
     // this.physics.add.collider(this.player, this.t1);
     this.physics.add.overlap(this.player, this.t1, () => {this.canTalk = true}, null, this);
@@ -207,6 +205,12 @@ class Town extends Phaser.Scene {
     else if(objectClicked.texture.key.includes("watering_can")){
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
+    }else if(pointer.x > 350 && pointer.x < 650 && pointer.y<650 && pointer.y>550){
+        this.libraryText("sus");
+    }else if(pointer.x > 650 && pointer.x < 950 && pointer.y<650 && pointer.y>550){
+        this.libraryText("sun")
+    }else if(pointer.x > 950 && pointer.x < 1250 && pointer.y < 650 && pointer.y > 550){
+        this.libraryText("ivy")
     }
     // if (!objectClicked.texture.key.includes("player")) {
     //   this.addItemtoInventory(objectClicked);
@@ -337,8 +341,23 @@ class Town extends Phaser.Scene {
       }
     }
 
-    libraryText(){
-
+    libraryText(name){
+      if (name === "sun"){
+        var text = "The Giant Sunflower also known as Helianthus giganteus\n is a native plant and blooms in summer.\n It attracts pollinators like bees."
+      }else if (name === "ivy"){
+        var text = "English Ivy also known as Hedera Helix\n is a vining plant that is not native to this region.\n This plant is actually invasive.";
+      }else if (name === "sus"){
+        var text = "Sustainability is based on a simple principle:\n Everything that we need for our survival and well-being\n depends, either directly or indirectly, on our natural environment.\n To pursue sustainability is to create and maintain the conditions\n under which humans and nature can exist in productive\n harmony to support present and future generations.";
+      } 
+      this.convo = this.add.text(300, 410, text, {
+        font: "20px Courier",
+        fill: "0x995f40",
+        align: "left"}
+      );
+      this.convo.setVisible(true);
+      this.xbutton.setVisible(true);
+      this.libScreen.setVisible(true);
+      this.blur.setVisible(true);
     }
 
     leaveLibrary(){
