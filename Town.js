@@ -100,12 +100,12 @@ class Town extends Phaser.Scene {
     this.blur.setVisible(false);
 
     // popup for library
-    this.blur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
+    this.libblur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
     this.libScreen = this.add.image(750, 500, "textbubble");
     this.libScreen.setScale(8,6)
     this.libScreen.text = '';
     this.libScreen.setVisible(false);
-    this.blur.setVisible(false);
+    this.libblur.setVisible(false);
 
     //button for continuing speech
     this.checkbutton = this.add.image(1050, 600, 'check_button');
@@ -120,17 +120,17 @@ class Town extends Phaser.Scene {
     this.doorbutton.setVisible(true);
 
     //Library buttons
-    this.susbutton = this.add.image(350, 600, 'sus_button');
+    this.susbutton = this.add.sprite(250, 600, 'sus_button');
     this.susbutton.setScale(5,4);
     this.susbutton.setInteractive();
     this.susbutton.setVisible(false);
 
-    this.sunbutton = this.add.image(750, 600, 'sunflower_button');
+    this.sunbutton = this.add.sprite(650, 600, 'sunflower_button');
     this.sunbutton.setScale(5,4);
     this.sunbutton.setInteractive();
     this.sunbutton.setVisible(false);
 
-    this.ivybutton = this.add.image(1050, 600, 'ivy_button');
+    this.ivybutton = this.add.sprite(950, 600, 'ivy_button');
     this.ivybutton.setScale(5,4);
     this.ivybutton.setInteractive();
     this.ivybutton.setVisible(false); 
@@ -205,11 +205,11 @@ class Town extends Phaser.Scene {
     else if(objectClicked.texture.key.includes("watering_can")){
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
-    }else if(pointer.x > 350 && pointer.x < 650 && pointer.y<650 && pointer.y>550){
+    } else if(objectClicked.texture.key.includes("sus_button")){
         this.libraryText("sus");
-    }else if(pointer.x > 650 && pointer.x < 950 && pointer.y<650 && pointer.y>550){
+    } else if(objectClicked.texture.key.includes("sunflower_button")){
         this.libraryText("sun")
-    }else if(pointer.x > 950 && pointer.x < 1250 && pointer.y < 650 && pointer.y > 550){
+    } else if (objectClicked.texture.key.includes("ivy_button")){
         this.libraryText("ivy")
     }
     // if (!objectClicked.texture.key.includes("player")) {
@@ -327,7 +327,7 @@ class Town extends Phaser.Scene {
       var text = "Welcome to the library!\n\n Click on the subject you want to learn about";
       if(!!text){
         this.libScreen.setVisible(true);
-        this.blur.setVisible(true);
+        this.libblur.setVisible(true);
         this.sunbutton.setVisible(true);
         this.ivybutton.setVisible(true);
         this.susbutton.setVisible(true);
@@ -342,6 +342,15 @@ class Town extends Phaser.Scene {
     }
 
     libraryText(name){
+      //Get rid of previous screen
+      this.libScreen.setVisible(false);
+      this.libblur.setVisible(false);
+      this.sunbutton.setVisible(false);
+      this.ivybutton.setVisible(false);
+      this.susbutton.setVisible(false);
+      this.xbutton.setVisible(false);
+      this.convo.setVisible(false);
+
       if (name === "sun"){
         var text = "The Giant Sunflower also known as Helianthus giganteus\n is a native plant and blooms in summer.\n It attracts pollinators like bees."
       }else if (name === "ivy"){
@@ -354,15 +363,16 @@ class Town extends Phaser.Scene {
         fill: "0x995f40",
         align: "left"}
       );
+
       this.convo.setVisible(true);
       this.xbutton.setVisible(true);
       this.libScreen.setVisible(true);
-      this.blur.setVisible(true);
+      this.libblur.setVisible(true);
     }
 
     leaveLibrary(){
       this.libScreen.setVisible(false);
-      this.blur.setVisible(false);
+      this.libblur.setVisible(false);
       this.sunbutton.setVisible(false);
       this.ivybutton.setVisible(false);
       this.susbutton.setVisible(false);
