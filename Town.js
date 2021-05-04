@@ -32,6 +32,9 @@ class Town extends Phaser.Scene {
       this.t2.setDepth(2);
       this.t2.id = new Townsperson("Darren", this.t2.x, this.t2.y);
       this.t2.setVisible(false);
+
+      //Create Library
+      //this.library.id = new Library();
     }
 
     create(){
@@ -98,11 +101,13 @@ class Town extends Phaser.Scene {
     this.talkScreen.setVisible(false);
     this.blur.setVisible(false);
 
-    //button for exiting speech bubble
-    // this.xbutton = this.add.image(1050, 600, 'x_button');
-    // this.xbutton.setScale(5,4);
-    // this.xbutton.setInteractive();
-    // this.xbutton.setVisible(false);
+    // popup for library
+    this.blur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
+    this.libScreen = this.add.image(750, 500, "textbubble");
+    this.libScreen.setScale(8,6)
+    this.libScreen.text = '';
+    this.libScreen.setVisible(false);
+    this.blur.setVisible(false);
 
     //button for continuing speech
     this.checkbutton = this.add.image(1050, 600, 'check_button');
@@ -110,6 +115,33 @@ class Town extends Phaser.Scene {
     this.checkbutton.setInteractive();
     this.checkbutton.setVisible(false);
 
+    //button for Library Door
+    this.doorbutton = this.add.image(250, 210, 'door_button');
+    this.doorbutton.scale = 0.75;
+    this.doorbutton.setInteractive();
+    this.doorbutton.setVisible(true);
+
+    //Library buttons
+    this.susbutton = this.add.image(350, 600, 'sus_button');
+    this.susbutton.setScale(5,4);
+    this.susbutton.setInteractive();
+    this.susbutton.setVisible(false);
+
+    this.sunbutton = this.add.image(750, 600, 'sunflower_button');
+    this.sunbutton.setScale(5,4);
+    this.sunbutton.setInteractive();
+    this.sunbutton.setVisible(false);
+
+    this.ivybutton = this.add.image(1050, 600, 'ivy_button');
+    this.ivybutton.setScale(5,4);
+    this.ivybutton.setInteractive();
+    this.ivybutton.setVisible(false); 
+
+    //button for exiting speech bubble
+    this.xbutton = this.add.image(1050, 500, 'x_button');
+    this.xbutton.setScale(5,4);
+    this.xbutton.setInteractive();
+    this.xbutton.setVisible(false);
     
     this.canTalk = false;
     this.personTalking = null;
@@ -133,8 +165,12 @@ class Town extends Phaser.Scene {
 
     this.input.on('gameobjectdown', this.onClicked.bind(this));
     //this.input.on('pointerdown', this.talk.bind(this));
-    //this.xbutton.on('pointerdown', this.hideTextBubble.bind(this));
+    this.xbutton.on('pointerdown', this.leaveLibrary.bind(this));
     this.checkbutton.on('pointerdown', this.nextTextBubble.bind(this));
+    this.doorbutton.on('pointerdown', this.libraryEntered.bind(this));
+    this.susbutton.on('pointerdown', this.libraryText.bind(this));
+    this.sunbutton.on('pointerdown', this.libraryText.bind(this));
+    this.ivybutton.on('pointerdown', this.libraryText.bind(this));
 
     // this.physics.add.collider(this.player, this.t1);
     this.physics.add.overlap(this.player, this.t1, () => {this.canTalk = true}, null, this);
@@ -275,9 +311,44 @@ class Town extends Phaser.Scene {
       this.blur.setVisible(false);
       this.checkbutton.setVisible(false);
       this.convo.setVisible(false);
-      if (this.personTalking != null){
-        this.talk(this.personTalking)
+      if (this.personTalking != null ){
+        if (this.personTalking.id.talkcount === 2 && this.personTalking.id.name ==="Glenn"){ 
+        }else{
+          this.talk(this.personTalking)
+        }
       }
+    }
+
+    libraryEntered(){
+      var text = "Welcome to the library!\n\n Click on the subject you want to learn about";
+      if(!!text){
+        this.libScreen.setVisible(true);
+        this.blur.setVisible(true);
+        this.sunbutton.setVisible(true);
+        this.ivybutton.setVisible(true);
+        this.susbutton.setVisible(true);
+        this.xbutton.setVisible(true);
+        this.convo = this.add.text(300, 410, text, {
+          font: "20px Courier",
+          fill: "0x995f40",
+          align: "left"}
+        );
+        this.convo.setVisible(true);
+      }
+    }
+
+    libraryText(){
+
+    }
+
+    leaveLibrary(){
+      this.libScreen.setVisible(false);
+      this.blur.setVisible(false);
+      this.sunbutton.setVisible(false);
+      this.ivybutton.setVisible(false);
+      this.susbutton.setVisible(false);
+      this.xbutton.setVisible(false);
+      this.convo.setVisible(false);
     }
 
     showTaskList() {
