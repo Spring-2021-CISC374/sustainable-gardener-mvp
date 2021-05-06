@@ -177,7 +177,7 @@ class Town extends Phaser.Scene {
     // this.input.on('pointerdown', function (pointer) {
     //   console.log(pointer.x, pointer.y);
     // });
-    console.log(app.inventoryArr)
+    this.beenToLib = false;
 
   }
 
@@ -282,23 +282,37 @@ class Town extends Phaser.Scene {
     showTextBubble(person){
       var text = person.id.conversations[person.id.talkCount];
       if(!!text){
-        person.id.talking = true;
-        this.talkScreen.setVisible(true);
-        this.blur.setVisible(true);
-        this.checkbutton.setVisible(true);
-        this.convo = this.add.text(300, 410, text, {
-          font: "20px Courier",
-          fill: "0x995f40",
-          align: "left"}
-        );
-        this.convo.setVisible(true);
-        if(person.id.talkCount === 3 && person.id.name === "Glenn"){
-          this.dropSeeds("english_ivy");
-          this.dropSeeds("sunflower");
-          this.t2.setVisible(true);
+        if(person.id.talkCount === 3 && person.id.name === "Glenn" && !this.beenToLib)
+        {
+          person.id.talking = true;
+          this.talkScreen.setVisible(true);
+          this.blur.setVisible(true);
+          this.checkbutton.setVisible(true);
+          this.convo = this.add.text(300, 410, "Trouble finding the library? Turn around kid, it's right behind me!", {
+            font: "20px Courier",
+            fill: "0x995f40",
+            align: "left"}
+          );
         }
-        else if(person.id.talkCount === 6 && person.id.name === "Darren"){
-          this.wateringCan.setVisible(true);
+        else{
+          person.id.talking = true;
+          this.talkScreen.setVisible(true);
+          this.blur.setVisible(true);
+          this.checkbutton.setVisible(true);
+          this.convo = this.add.text(300, 410, text, {
+            font: "20px Courier",
+            fill: "0x995f40",
+            align: "left"}
+          );
+          this.convo.setVisible(true);
+          if(person.id.talkCount === 3 && person.id.name === "Glenn"){
+            this.dropSeeds("english_ivy");
+            this.dropSeeds("sunflower");
+            this.t2.setVisible(true);
+          }
+          else if(person.id.talkCount === 6 && person.id.name === "Darren"){
+            this.wateringCan.setVisible(true);
+          }
         }
       }
     }
@@ -324,6 +338,7 @@ class Town extends Phaser.Scene {
     }
 
     libraryEntered(){
+      this.beenToLib = true;
       var text = "Welcome to the library!\n\n Click on the subject you want to learn about";
       if(!!text){
         this.libScreen.setVisible(true);
