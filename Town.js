@@ -177,7 +177,7 @@ class Town extends Phaser.Scene {
     // this.input.on('pointerdown', function (pointer) {
     //   console.log(pointer.x, pointer.y);
     // });
-    console.log(app.inventoryArr)
+    this.beenToLib = false;
 
   }
 
@@ -197,7 +197,7 @@ class Town extends Phaser.Scene {
 
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
-    console.log('object', objectClicked, pointer.x, pointer.y)
+    // console.log('object', objectClicked, pointer.x, pointer.y)
 
     if(this.canTalk && (objectClicked.texture.key.includes('t1') || objectClicked.texture.key.includes("t2"))){
       this.talk(objectClicked);
@@ -258,7 +258,7 @@ class Town extends Phaser.Scene {
         person.id.talking = false;
         this.canTalk = true;
       }
-      console.log("person", person)
+      // console.log("person", person)
       if(this.canTalk){
         this.checkmark1.setVisible(true);
         this.canTalk = false;
@@ -272,7 +272,12 @@ class Town extends Phaser.Scene {
           person.setDepth(5);
           person.id.talking = true;
           this.showTextBubble(person);
-          person.id.talkCount+=1; 
+          if(person.id.talkCount === 3 && !this.beenToLib){
+            person.id.talkCount = 3;
+          }
+          else{
+            person.id.talkCount+=1; 
+          }
         }
         
       }
@@ -282,23 +287,38 @@ class Town extends Phaser.Scene {
     showTextBubble(person){
       var text = person.id.conversations[person.id.talkCount];
       if(!!text){
-        person.id.talking = true;
-        this.talkScreen.setVisible(true);
-        this.blur.setVisible(true);
-        this.checkbutton.setVisible(true);
-        this.convo = this.add.text(300, 410, text, {
-          font: "20px Courier",
-          fill: "0x995f40",
-          align: "left"}
-        );
-        this.convo.setVisible(true);
-        if(person.id.talkCount === 3 && person.id.name === "Glenn"){
-          this.dropSeeds("english_ivy");
-          this.dropSeeds("sunflower");
-          this.t2.setVisible(true);
+        if(person.id.talkCount === 3 && person.id.name === "Glenn" && !this.beenToLib)
+        {
+          person.id.talking = true;
+          this.talkScreen.setVisible(true);
+          this.blur.setVisible(true);
+          this.checkbutton.setVisible(true);
+          this.convo = this.add.text(300, 410, "Glenn:\n Trouble finding the library? Turn around kid, it's right behind me!", {
+            font: "20px Courier",
+            fill: "0x995f40",
+            align: "left"}
+          );
         }
-        else if(person.id.talkCount === 6 && person.id.name === "Darren"){
-          this.wateringCan.setVisible(true);
+        else{
+          console.log('else');
+          person.id.talking = true;
+          this.talkScreen.setVisible(true);
+          this.blur.setVisible(true);
+          this.checkbutton.setVisible(true);
+          this.convo = this.add.text(300, 410, text, {
+            font: "20px Courier",
+            fill: "0x995f40",
+            align: "left"}
+          );
+          this.convo.setVisible(true);
+          if(person.id.talkCount === 3 && person.id.name === "Glenn"){
+            this.dropSeeds("english_ivy");
+            this.dropSeeds("sunflower");
+            this.t2.setVisible(true);
+          }
+          else if(person.id.talkCount === 6 && person.id.name === "Darren"){
+            this.wateringCan.setVisible(true);
+          }
         }
       }
     }
@@ -311,12 +331,14 @@ class Town extends Phaser.Scene {
     }
 
     nextTextBubble(){
+      // console.log('persontalking', this.personTalking);
       this.talkScreen.setVisible(false);
       this.blur.setVisible(false);
       this.checkbutton.setVisible(false);
       this.convo.setVisible(false);
       if (this.personTalking != null ){
-        if (this.personTalking.id.talkcount === 2 && this.personTalking.id.name ==="Glenn"){ 
+        if (this.personTalking.id.talkCount === 3 && this.personTalking.id.name === "Glenn" && !this.beenToLib){ 
+          console.log('should stop here')
         }else{
           this.talk(this.personTalking)
         }
@@ -324,6 +346,7 @@ class Town extends Phaser.Scene {
     }
 
     libraryEntered(){
+      this.beenToLib = true;
       var text = "Welcome to the library!\n\n Click on the subject you want to learn about";
       if(!!text){
         this.libScreen.setVisible(true);
