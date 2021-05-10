@@ -19,7 +19,6 @@ class Home extends Phaser.Scene {
     
     this.player = this.physics.add.sprite(650, 450, "player");
     this.player.play("player_anim_down", false);
-    this.load.image("shovel", "assets/shovel.png");
     this.load.image("scroll", "assets/scroll.png");
     this.load.image("checkmark", "assets/checkmark.png");
     
@@ -183,11 +182,6 @@ class Home extends Phaser.Scene {
     // this.shovel1.setInteractive();
     // app.itemArr.push(this.shovel1);
 
-    this.shovel2 = this.add.sprite(config.width / 2 + 50, config.height / 2, "shovel");
-    this.shovel2.setScale(0.25);
-    this.shovel2.setInteractive();
-    app.itemArr.push(this.shovel2);
-
     this.wateringCan = this.add.sprite(config.width / 2 + 150, config.height / 2, "watering_can");
     this.wateringCan.setScale(0.3)
     this.wateringCan.setInteractive();
@@ -288,7 +282,7 @@ class Home extends Phaser.Scene {
   //pointer is the mouse that triggered the event
   onClicked(pointer, objectClicked) {
  
-    if ((objectClicked.texture.key === "shovel" || objectClicked.texture.key === "sunflower_seeds" || 
+    if ((objectClicked.texture.key === "sunflower_seeds" || 
         objectClicked.texture.key === "english_ivy_seeds" || objectClicked.texture.key === "watering_can") && objectClicked.inventory==null) {
       this.addItemtoInventory(objectClicked);
       objectClicked.destroy();
@@ -450,6 +444,7 @@ class Home extends Phaser.Scene {
     app.inventoryArr = [];
     app.itemArr = [];
     app.currentItem = null;
+    config.tutorial = true;
     this.scene.start('Home');
   }
 
