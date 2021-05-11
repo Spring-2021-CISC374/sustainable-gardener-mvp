@@ -5,20 +5,17 @@ class Home extends Phaser.Scene {
   }
 
   preload() {
-    // this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "homeImg");
     
     // this.load.tilemapTiledJSON("homeMap", "assets/maps/homeTile.json");
-    // this.load.image('tiles', 'assets/HomeImage.png');
-
-    // this.load.image('bg', 'assets/HomeImage.png');
-    this.background = this.add.image(config.width * 3/8, config.height * 3/8, "homeImg");
+    this.background = this.add.image(config.width/2, config.height/2, "homeImg");
     this.background.scale = 0.75;
     // this.load.tilemapTiledJSON('homeTS', 'assets/maps/homeTS.json'); // homeMap.json
     this.load.tilemapTiledJSON('homeMap', 'assets/maps/homeMap.json');
     this.load.image("tiles", "assets/tilesets/homeTS.json");
     
     this.player = this.physics.add.sprite(650, 450, "player");
-    this.player.play("player_anim_down", false);
+    this.player.setScale(3);
+    this.player.play("player_anim_stand_down", false);
     this.load.image("scroll", "assets/scroll.png");
     this.load.image("checkmark", "assets/checkmark.png");
     
@@ -27,14 +24,14 @@ class Home extends Phaser.Scene {
   create() {
 
     this.map = this.make.tilemap({ key: "homeMap" }, 16, 16) ;
-    this.map.setCollisionByProperty({collides: true})
+    this.map.setCollisionByProperty({collides: "true"})
 	  this.physics.world.setBoundsCollision();
     // this.tileset = this.map.addTilesetImage("homeImg");
-    for (let i = 0; i < this.map.layers.length; i++) {
-      const layer = this.map.createLayer(i, "homeMap", 0, 0)
-      layer.setDepth(i);
-      layer.scale = 0;
-    }
+    // for (let i = 0; i < this.map.layers.length; i++) {
+    //   const layer = this.map.createLayer(i, "homeMap", 0, 0)
+    //   layer.setDepth(i);
+    //   layer.scale = 0;
+    // }
 
     // this.map = this.add.tilemap('homeMap');
     // this.map.scale = 0.75;
@@ -43,88 +40,87 @@ class Home extends Phaser.Scene {
 
     // this.home_map.scale = 0.75;
     // this.map = this.add.tilemap('homeMap');
-	  this.map.setCollisionByProperty({collides: true})
-	  // this.physics.world.setBoundsCollision()
+    console.log(this.map)
     
-    // this.add.text(20, 20, "Sustainable Gardener", {
-    //   font: "25px Courier",
-    //   fill: "white",
-    //   align: "center",
-    //   shadow: {
-    //     offsetX: 2,
-    //     offsetY: 2,
-    //     color: '#2e2e2e',
-    //     blur: 5,
-    //     fill: true
-    //   }
-    // });
+    this.add.text(20, 20, "Sustainable Gardener", {
+      font: "25px Courier",
+      fill: "white",
+      align: "center",
+      shadow: {
+        offsetX: 2,
+        offsetY: 2,
+        color: '#2e2e2e',
+        blur: 5,
+        fill: true
+      }
+    });
 
-    this.gardenArea = this.add.grid(300, 575, 200, 120, 40, 40, 0x604c44)
-    this.gardenArea.setDepth(0);
-
-    this.plantCount = 0; 
-    this.plants = [];
-
-    this.plant1 = new Plant('unknown', 220, 535);
-    this.plant1Img = this.add.image(this.plant1.x, this.plant1.y, this.plant1.img);
-    this.plants.push([this.plant1, this.plant1Img]);
-    this.plant2 = new Plant('unknown', 260, 535);
-    this.plant2Img = this.add.image(this.plant2.x, this.plant2.y, this.plant2.img);
-    this.plants.push([this.plant2, this.plant2Img]);
-    this.plant3 = new Plant('unknown', 300, 535);
-    this.plant3Img = this.add.image(this.plant3.x, this.plant3.y, this.plant3.img);
-    this.plants.push([this.plant3, this.plant3Img]);
-    this.plant4 = new Plant('unknown', 340, 535);
-    this.plant4Img = this.add.image(this.plant4.x, this.plant4.y, this.plant4.img);
-    this.plants.push([this.plant4, this.plant4Img]);
-    this.plant5 = new Plant('unknown', 380, 535);
-    this.plant5Img = this.add.image(this.plant5.x, this.plant5.y, this.plant5.img);
-    this.plants.push([this.plant5, this.plant5Img]);
-    
-    this.plant6 = new Plant('unknown', 220, 575);
-    this.plant6Img = this.add.image(this.plant6.x, this.plant6.y, this.plant6.img);
-    this.plants.push([this.plant6, this.plant6Img]);
-    this.plant7 = new Plant('unknown', 260, 575);
-    this.plant7Img = this.add.image(this.plant7.x, this.plant7.y, this.plant7.img);
-    this.plants.push([this.plant7, this.plant7Img]);
-    this.plant8 = new Plant('unknown', 300, 575);
-    this.plant8Img = this.add.image(this.plant8.x, this.plant8.y, this.plant8.img);
-    this.plants.push([this.plant8, this.plant8Img]);
-    this.plant9 = new Plant('unknown', 340, 575);
-    this.plant9Img = this.add.image(this.plant9.x, this.plant9.y, this.plant9.img);
-    this.plants.push([this.plant9, this.plant9Img]);
-    this.plant10 = new Plant('unknown', 380, 575);
-    this.plant10Img = this.add.image(this.plant10.x, this.plant10.y, this.plant10.img);
-    this.plants.push([this.plant10, this.plant10Img]);
-    
-    this.plant11 = new Plant('unknown', 220, 615);
-    this.plant11Img = this.add.image(this.plant11.x, this.plant11.y, this.plant11.img);
-    this.plants.push([this.plant11, this.plant11Img]);
-    this.plant12 = new Plant('unknown', 260, 615);
-    this.plant12Img = this.add.image(this.plant12.x, this.plant12.y, this.plant12.img);
-    this.plants.push([this.plant12, this.plant12Img]);
-    this.plant13 = new Plant('unknown', 300, 615);
-    this.plant13Img = this.add.image(this.plant13.x, this.plant13.y, this.plant13.img);
-    this.plants.push([this.plant13, this.plant13Img]);
-    this.plant14 = new Plant('unknown', 340, 615);
-    this.plant14Img = this.add.image(this.plant14.x, this.plant14.y, this.plant14.img);
-    this.plants.push([this.plant14, this.plant14Img]);
-    this.plant15 = new Plant('unknown', 380, 615);
-    this.plant15Img = this.add.image(this.plant15.x, this.plant15.y, this.plant15.img);
-    this.plants.push([this.plant15, this.plant15Img]);
-
-    console.log(this.plants)
-
-    this.plantCount = this.plants.length;
-    for(var i=0; i < this.plantCount; i++){
-      this.plants[i][1].scale = 2;
-    }
 
     if(config.tutorial){
+
+      //plants
+      this.gardenArea = this.add.grid(300, 575, 200, 120, 40, 40, 0x604c44)
+      this.gardenArea.setDepth(0);
+  
+      this.plantCount = 0; 
+  
+      this.plant1 = new Plant('unknown', 220, 535);
+      this.plant1Img = this.add.image(this.plant1.x, this.plant1.y, this.plant1.img);
+      app.plantArr.push([this.plant1, this.plant1Img]);
+      this.plant2 = new Plant('unknown', 260, 535);
+      this.plant2Img = this.add.image(this.plant2.x, this.plant2.y, this.plant2.img);
+      app.plantArr.push([this.plant2, this.plant2Img]);
+      this.plant3 = new Plant('unknown', 300, 535);
+      this.plant3Img = this.add.image(this.plant3.x, this.plant3.y, this.plant3.img);
+      app.plantArr.push([this.plant3, this.plant3Img]);
+      this.plant4 = new Plant('unknown', 340, 535);
+      this.plant4Img = this.add.image(this.plant4.x, this.plant4.y, this.plant4.img);
+      app.plantArr.push([this.plant4, this.plant4Img]);
+      this.plant5 = new Plant('unknown', 380, 535);
+      this.plant5Img = this.add.image(this.plant5.x, this.plant5.y, this.plant5.img);
+      app.plantArr.push([this.plant5, this.plant5Img]);
+      
+      this.plant6 = new Plant('unknown', 220, 575);
+      this.plant6Img = this.add.image(this.plant6.x, this.plant6.y, this.plant6.img);
+      app.plantArr.push([this.plant6, this.plant6Img]);
+      this.plant7 = new Plant('unknown', 260, 575);
+      this.plant7Img = this.add.image(this.plant7.x, this.plant7.y, this.plant7.img);
+      app.plantArr.push([this.plant7, this.plant7Img]);
+      this.plant8 = new Plant('unknown', 300, 575);
+      this.plant8Img = this.add.image(this.plant8.x, this.plant8.y, this.plant8.img);
+      app.plantArr.push([this.plant8, this.plant8Img]);
+      this.plant9 = new Plant('unknown', 340, 575);
+      this.plant9Img = this.add.image(this.plant9.x, this.plant9.y, this.plant9.img);
+      app.plantArr.push([this.plant9, this.plant9Img]);
+      this.plant10 = new Plant('unknown', 380, 575);
+      this.plant10Img = this.add.image(this.plant10.x, this.plant10.y, this.plant10.img);
+      app.plantArr.push([this.plant10, this.plant10Img]);
+      
+      this.plant11 = new Plant('unknown', 220, 615);
+      this.plant11Img = this.add.image(this.plant11.x, this.plant11.y, this.plant11.img);
+      app.plantArr.push([this.plant11, this.plant11Img]);
+      this.plant12 = new Plant('unknown', 260, 615);
+      this.plant12Img = this.add.image(this.plant12.x, this.plant12.y, this.plant12.img);
+      app.plantArr.push([this.plant12, this.plant12Img]);
+      this.plant13 = new Plant('unknown', 300, 615);
+      this.plant13Img = this.add.image(this.plant13.x, this.plant13.y, this.plant13.img);
+      app.plantArr.push([this.plant13, this.plant13Img]);
+      this.plant14 = new Plant('unknown', 340, 615);
+      this.plant14Img = this.add.image(this.plant14.x, this.plant14.y, this.plant14.img);
+      app.plantArr.push([this.plant14, this.plant14Img]);
+      this.plant15 = new Plant('unknown', 380, 615);
+      this.plant15Img = this.add.image(this.plant15.x, this.plant15.y, this.plant15.img);
+      app.plantArr.push([this.plant15, this.plant15Img]);
+  
+      this.plantCount = app.plantArr.length;
+      for(var i=0; i < this.plantCount; i++){
+        app.plantArr[i][1].scale = 2;
+      }
+
       // task list 
-      // this.paper = this.add.image(1275, 200, "scroll");
+      this.paper = this.add.image(1275, 200, "scroll");
       // this.paper.setScale(0.25);
-      this.paper = this.add.image(config.width/1.5, config.height/5, "scroll");
+      // this.paper = this.add.image(config.width/1.5, config.height/5, "scroll");
       this.paper.setScale(0.25);
       this.add.text(1200,100, "Task List:",{fill:"#000000", fontSize:"25px"});
       this.add.text(1200, 150, "- Use the WASD keys \n to move player", { fill: "#000000", fontSize: "15px" });
@@ -171,8 +167,8 @@ class Home extends Phaser.Scene {
 
 
     // player movement
+    this.player.setSize(16, 16);
     this.player.setInteractive();
-    this.player.setScale(3);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(2);
@@ -190,27 +186,27 @@ class Home extends Phaser.Scene {
 
     this.input.on('pointerdown', function (pointer) {
       if(pointer.leftButtonDown()){
-        for(var i = 0; i < this.plants.length; i ++){
-          if((Math.abs(pointer.x - this.plants[i][0].x) < 20) && (Math.abs(pointer.y - this.plants[i][0].y) < 20)
-          && (Math.abs(this.player.x - this.plants[i][0].x) < 70) && (Math.abs(this.player.y - this.plants[i][0].y) < 70)){  
+        for(var i = 0; i < app.plantArr.length; i ++){
+          if((Math.abs(pointer.x - app.plantArr[i][0].x) < 20) && (Math.abs(pointer.y - app.plantArr[i][0].y) < 20)
+          && (Math.abs(this.player.x - app.plantArr[i][0].x) < 70) && (Math.abs(this.player.y - app.plantArr[i][0].y) < 70)){  
             if(app.currentItem !== null){
-              if(app.currentItem.texture.key.includes("english_ivy_seeds") && this.plants[i][0].stage === -1){
-                this.plants[i][0].name = "english_ivy";
-                this.plants[i][0].water(this.plants[i][0]);
+              if(app.currentItem.texture.key.includes("english_ivy_seeds") && app.plantArr[i][0].stage === -1){
+                app.plantArr[i][0].name = "english_ivy";
+                app.plantArr[i][0].water(app.plantArr[i][0]);
                 // this.checkmark5.setVisible(true);
               }
-              else if(app.currentItem.texture.key.includes("sunflower_seeds") && this.plants[i][0].stage === -1){
-                this.plants[i][0].name = "sunflower";
-                this.plants[i][0].water(this.plants[i][0]);
+              else if(app.currentItem.texture.key.includes("sunflower_seeds") && app.plantArr[i][0].stage === -1){
+                app.plantArr[i][0].name = "sunflower";
+                app.plantArr[i][0].water(app.plantArr[i][0]);
                 // this.checkmark5.setVisible(true);
               }
-              else if(app.currentItem.texture.key.includes("watering_can") && this.plants[i][0].stage != -1){
+              else if(app.currentItem.texture.key.includes("watering_can") && app.plantArr[i][0].stage != -1){
                 console.log('watering')
-                var add = this.plants[i][0].water(this.plants[i][0]);
+                var add = app.plantArr[i][0].water(app.plantArr[i][0]);
                 // this.checkmark5.setVisible(true);
                 if(add){
-                  this.addItemtoInventory(this.plants[i]);
-                  //this.dropSeeds(this.plants[i][0]);
+                  this.addItemtoInventory(app.plantArr[i]);
+                  //this.dropSeeds(app.plantArr[i][0]);
                 }
               }
             }
@@ -221,10 +217,10 @@ class Home extends Phaser.Scene {
     }, this);
 
     //inventory stuff
-    this.inventory = this.add.image(config.width/1.8, config.height/1.5, "inventory");
+    this.inventory = this.add.image(1050, 700, "inventory");
     this.inventory.setScale(5,3)
 
-    this.container = this.add.container(config.width / 1.8, config.height / 1.5);
+    this.container = this.add.container(1050, 700);
     this.container.setDepth(2);
 
     this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
@@ -307,14 +303,14 @@ class Home extends Phaser.Scene {
     if(this.player.y >= 760 && this.player.x >= 635 && this.player.x <= 689){
       this.checkmark4.setVisible(true);
     }
-    if(this.player.y >= 783 && this.player.x >= 635 && this.player.x <= 689){
+    if(this.player.y >= 770 && this.player.x >= 635 && this.player.x <= 689){
       this.scene.start('Town');
     }
 
     //update plant imgs
-    for(var i = 0; i < this.plants.length; i ++){
-      this.plants[i][1] = this.add.image(this.plants[i][0].x, this.plants[i][0].y, this.plants[i][0].img);
-      this.plants[i][1].setScale(2);
+    for(var i = 0; i < app.plantArr.length; i ++){
+      app.plantArr[i][1] = this.add.image(app.plantArr[i][0].x, app.plantArr[i][0].y, app.plantArr[i][0].img);
+      app.plantArr[i][1].setScale(2);
     }
 
     if(this.checkmark1.visible && this.checkmark4.visible && this.checkmark6.visible){

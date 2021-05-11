@@ -62,6 +62,10 @@ class Scene1 extends Phaser.Scene {
             frameWidth: 16,
             frameHeight: 18
         });
+        this.load.spritesheet("player_stand_down", "assets/player_stand_down.png", {
+            frameWidth: 16,
+            frameHeight: 18
+        });
 
         //townsperson1 (t1) sprites
         this.load.spritesheet("t1_left", "assets/t1_left.png", {
@@ -90,7 +94,7 @@ class Scene1 extends Phaser.Scene {
         });
 
         //townsperson1 (t2) sprites
-        this.load.spritesheet("t2_left", "assets/t2_left.png", {
+        this.load.spritesheet("t2_left", "assets/t2_stand_left.png", {
             frameWidth: 16,
             frameHeight: 18
         });
@@ -102,7 +106,7 @@ class Scene1 extends Phaser.Scene {
             frameWidth: 16,
             frameHeight: 18
         });
-        this.load.spritesheet("t2_right", "assets/t2_right.png", {
+        this.load.spritesheet("t2_right", "assets/t2_stand_right.png", {
             frameWidth: 16,
             frameHeight: 18
         });
@@ -139,6 +143,12 @@ class Scene1 extends Phaser.Scene {
         this.anims.create({
             key: "player_anim_down",
             frames: this.anims.generateFrameNames('player_down', {start: 4, end: 0}),
+            frameRate: 10,
+            repeat: 0
+        });
+        this.anims.create({
+            key: "player_anim_stand_down",
+            frames: this.anims.generateFrameNames('player_stand_down'),
             frameRate: 10,
             repeat: 0
         });

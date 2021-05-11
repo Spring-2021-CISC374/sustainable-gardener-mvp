@@ -1,11 +1,12 @@
 var config = {
-    width: 1917,
-    height: 1077,
+    width: 1416,
+    height: 804,
+    background: '0x000000',
     scene: [Scene1, Title, Home, Town],
     physics: {
       default: "arcade",
       arcade: {
-          debug: false
+          debug: true
       }
     },
     pixelArt: true,
@@ -15,6 +16,7 @@ var config = {
 var app = {
   inventoryArr: [],
   itemArr: [],
+  plantArr: [],
   currentItem: null
 }
 
