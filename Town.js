@@ -5,17 +5,19 @@ class Town extends Phaser.Scene {
   }
 
     preload(){
-      this.background = this.add.image(config.width * 3 / 8, config.height * 3 / 8, "townImg");
-      this.background.scale = 0.75;
+      this.load.tilemapTiledJSON('townMap', 'assets/maps/townMap.json');
+      this.load.image("town_tiles", "assets/Town_image.png");
+    
       this.player = this.physics.add.sprite(760, 40, "player");
-      this.player.play("player_anim_down", false);
-      this.load.image("shovel", "assets/shovel.png");
+      this.player.setScale(3);
+      this.player.play("player_anim_stand_down", false);
 
       this.load.image("scroll", "assets/scroll.png");
       this.load.image("checkmark", "assets/checkmark.png");
 
       this.t1 = this.physics.add.sprite(150, 340, "t1");
       this.t1.play("Glenn_anim_down", false);
+      this.t1.setSize(16, 16);
       this.t1.setInteractive();
       this.t1.setScale(3);
       this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -25,6 +27,7 @@ class Town extends Phaser.Scene {
 
       this.t2 = this.physics.add.sprite(1300, 600, "t2");
       this.t2.play("Darren_anim_right", false);
+      this.t2.setSize(16, 16);
       this.t2.setInteractive();
       this.t2.setScale(3);
       this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -36,6 +39,18 @@ class Town extends Phaser.Scene {
     }
 
     create(){
+
+      this.map = this.make.tilemap({ key: "townMap" }, 16, 16);
+      this.tileset = this.map.addTilesetImage('townTS', 'town_tiles');
+      this.groundLayer = this.map.createLayer("town", this.tileset, 0, 0);
+      this.groundLayer.scale = 0.75;
+      this.topLayer = this.map.createLayer("tree", this.tileset, 0, 0);
+      this.topLayer.scale = 0.75;
+      this.topLayer.setDepth(10);
+      this.physics.world.setBoundsCollision();
+      this.physics.add.collider(this.player, this.groundLayer);
+      this.groundLayer.setCollisionByProperty({ collides: true });
+
         this.add.text(20, 20, "Sustainable Gardener", {
             font: "25px Courier",
             fill: "white",
@@ -52,7 +67,7 @@ class Town extends Phaser.Scene {
         
         
       //task list 
-      this.paper = this.add.image(config.width/1.5, config.height/6, "scroll");
+      this.paper = this.add.image(1275, 200, "scroll");
       this.paper.setScale(0.25);
       this.add.text(1200, 80, "Task List:",{fill:"#000000", fontSize:"25px"});
       this.add.text(1200,115, "- Find and speak to \n a member of the town. \n When you are close, \n click on the  \n townsperson to begin  \n speaking to them.",{fill:"#000000", fontSize:"15px"});
@@ -75,10 +90,10 @@ class Town extends Phaser.Scene {
         
     //inventory stuff
 
-    this.inventory = this.add.image(config.width/1.8, config.height/1.5, "inventory");
+    this.inventory = this.add.image(1050, 700, "inventory");
     this.inventory.setScale(5,3)
 
-    this.container = this.add.container(config.width / 1.8, config.height / 1.5);
+    this.container = this.add.container(1050, 700);
     this.container.setDepth(2);
 
     //update inventory
@@ -114,7 +129,7 @@ class Town extends Phaser.Scene {
     this.checkbutton.setVisible(false);
 
     //button for Library Door
-    this.doorbutton = this.add.image(235, 215, 'door_button');
+    this.doorbutton = this.add.image(222, 210, 'door_button');
     this.doorbutton.scale = 0.75;
     this.doorbutton.setInteractive();
     this.doorbutton.setVisible(true);
@@ -149,10 +164,11 @@ class Town extends Phaser.Scene {
 
     this.t = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
 
+    this.player.setSize(16, 4);
     this.player.setInteractive();
-    this.player.setScale(3);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
+    this.player.setDepth(2);
 
     this.cursorKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,

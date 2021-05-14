@@ -6,7 +6,7 @@ class Title extends Phaser.Scene {
 
     preload(){
         // this.background = this.add.image("title", "assets/images/title.png");
-        this.background = this.add.image(config.width* 1/3, config.height* 1/3, "title");
+        this.background = this.add.image(config.width/2, config.height/2, "title");
         this.background.setScale(0.6);
         this.load.bitmapFont("pixelFont", "assets/font/font.png","assets/font/font.xml");
     }
