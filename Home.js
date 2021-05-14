@@ -7,11 +7,11 @@ class Home extends Phaser.Scene {
   preload() {
     
     // this.load.tilemapTiledJSON("homeMap", "assets/maps/homeTile.json");
-    this.background = this.add.image(config.width/2, config.height/2, "homeImg");
-    this.background.scale = 0.75;
+    // this.background = this.add.image(config.width/2, config.height/2, "homeImg");
+    // this.background.scale = 0.75;
     // this.load.tilemapTiledJSON('homeTS', 'assets/maps/homeTS.json'); // homeMap.json
     this.load.tilemapTiledJSON('homeMap', 'assets/maps/homeMap.json');
-    this.load.image("tiles", "assets/tilesets/homeTS.json");
+    this.load.image("tiles", "assets/HomeImage.png");
     
     this.player = this.physics.add.sprite(650, 450, "player");
     this.player.setScale(3);
@@ -23,24 +23,17 @@ class Home extends Phaser.Scene {
 
   create() {
 
-    this.map = this.make.tilemap({ key: "homeMap" }, 16, 16) ;
-    this.map.setCollisionByProperty({collides: "true"})
+    this.map = this.make.tilemap({ key: "homeMap" }, 16, 16);
+    this.tileset = this.map.addTilesetImage('homeTS', 'tiles');
+    this.groundLayer = this.map.createLayer("bg", this.tileset, 0, 0);
+    this.groundLayer.setScale(0.75);
+    this.mainLayer = this.map.createLayer("home", this.tileset, 0, 0);
+    // this.mainLayer.setCollisionByProperty({collides: "true"});
+    this.mainLayer.setScale(0.75);
 	  this.physics.world.setBoundsCollision();
-    // this.tileset = this.map.addTilesetImage("homeImg");
-    // for (let i = 0; i < this.map.layers.length; i++) {
-    //   const layer = this.map.createLayer(i, "homeMap", 0, 0)
-    //   layer.setDepth(i);
-    //   layer.scale = 0;
-    // }
-
-    // this.map = this.add.tilemap('homeMap');
-    // this.map.scale = 0.75;
-    // var tileset = this.map.addTilesetImage('tileset_sprite', 'gameTiles');
-    // this.bg = this.map.createStaticLayer('bg', tileset);
-
-    // this.home_map.scale = 0.75;
-    // this.map = this.add.tilemap('homeMap');
-    console.log(this.map)
+    this.canWalk = true;
+    this.physics.add.collider(this.player, this.mainLayer);
+    this.mainLayer.setCollisionByProperty({ collides: true });
     
     this.add.text(20, 20, "Sustainable Gardener", {
       font: "25px Courier",
@@ -167,7 +160,8 @@ class Home extends Phaser.Scene {
 
 
     // player movement
-    this.player.setSize(16, 16);
+    this.player.setSize(12, 4);
+    this.player.originY = 1;
     this.player.setInteractive();
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
@@ -291,7 +285,6 @@ class Home extends Phaser.Scene {
   }
 
   update() {
-    // this.shovel1.angle += 1;
     var pointer = this.input.activePointer;
     this.movePlayer();
     this.showInventory();
@@ -317,6 +310,11 @@ class Home extends Phaser.Scene {
       config.tutorial = false;
     }
 
+  }
+
+  setCanWalk(){
+    this.canWalk = false;
+    console.log('walking? ', this.canWalk)
   }
 
   movePlayer() {
