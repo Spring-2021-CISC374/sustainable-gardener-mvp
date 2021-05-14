@@ -5,11 +5,12 @@ class Town extends Phaser.Scene {
   }
 
     preload(){
-      this.background = this.add.image(config.width/2, config.height/2, "townImg");
-      this.background.scale = 0.75;
+      this.load.tilemapTiledJSON('townMap', 'assets/maps/townMap.json');
+      this.load.image("town_tiles", "assets/Town_image.png");
+    
       this.player = this.physics.add.sprite(760, 40, "player");
-      this.player.play("player_anim_down", false);
-      this.load.image("shovel", "assets/shovel.png");
+      this.player.setScale(3);
+      this.player.play("player_anim_stand_down", false);
 
       this.load.image("scroll", "assets/scroll.png");
       this.load.image("checkmark", "assets/checkmark.png");
@@ -38,6 +39,18 @@ class Town extends Phaser.Scene {
     }
 
     create(){
+
+      this.map = this.make.tilemap({ key: "townMap" }, 16, 16);
+      this.tileset = this.map.addTilesetImage('townTS', 'town_tiles');
+      this.groundLayer = this.map.createLayer("town", this.tileset, 0, 0);
+      this.groundLayer.scale = 0.75;
+      this.topLayer = this.map.createLayer("tree", this.tileset, 0, 0);
+      this.topLayer.scale = 0.75;
+      this.topLayer.setDepth(10);
+      this.physics.world.setBoundsCollision();
+      this.physics.add.collider(this.player, this.groundLayer);
+      this.groundLayer.setCollisionByProperty({ collides: true });
+
         this.add.text(20, 20, "Sustainable Gardener", {
             font: "25px Courier",
             fill: "white",
@@ -151,11 +164,11 @@ class Town extends Phaser.Scene {
 
     this.t = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
 
-    this.player.setSize(16, 16);
+    this.player.setSize(16, 4);
     this.player.setInteractive();
-    this.player.setScale(3);
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.player.setCollideWorldBounds(true);
+    this.player.setDepth(2);
 
     this.cursorKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,

@@ -5,11 +5,6 @@ class Home extends Phaser.Scene {
   }
 
   preload() {
-    
-    // this.load.tilemapTiledJSON("homeMap", "assets/maps/homeTile.json");
-    // this.background = this.add.image(config.width/2, config.height/2, "homeImg");
-    // this.background.scale = 0.75;
-    // this.load.tilemapTiledJSON('homeTS', 'assets/maps/homeTS.json'); // homeMap.json
     this.load.tilemapTiledJSON('homeMap', 'assets/maps/homeMap.json');
     this.load.image("tiles", "assets/HomeImage.png");
     
@@ -31,7 +26,6 @@ class Home extends Phaser.Scene {
     // this.mainLayer.setCollisionByProperty({collides: "true"});
     this.mainLayer.setScale(0.75);
 	  this.physics.world.setBoundsCollision();
-    this.canWalk = true;
     this.physics.add.collider(this.player, this.mainLayer);
     this.mainLayer.setCollisionByProperty({ collides: true });
     
@@ -310,11 +304,6 @@ class Home extends Phaser.Scene {
       config.tutorial = false;
     }
 
-  }
-
-  setCanWalk(){
-    this.canWalk = false;
-    console.log('walking? ', this.canWalk)
   }
 
   movePlayer() {
