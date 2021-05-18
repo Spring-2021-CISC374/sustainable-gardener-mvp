@@ -143,10 +143,10 @@ class Home extends Phaser.Scene {
       this.checkmark6.setScale(.025);   
     }
     else { // when the player returns home
-      this.paper = this.add.image(config.width/1.5, config.height/5, "scroll");
+      this.paper = this.add.image(1275, 200, "scroll");
       this.paper.setScale(0.25);
       this.add.text(1200,100, "Task List:",{fill:"#000000", fontSize:"25px"});
-      this.add.text(1200, 150, "- Grow some \n native plants! \n Walk over to your \n garden, click on the \n seeds you want to \n use and click on \n your garden again \n to plant. Use the \n watering can to \n water your plants\n until they're \n harvested!", { fill: "#000000", fontSize: "15px" });
+      this.add.text(1200, 140, "- Grow some \n native plants! \n Walk over to your \n garden, click on the \n seeds you want to \n use and click on \n your garden again \n to plant. Use the \n watering can to \n water your plants\n until they're \n harvested!", { fill: "#000000", fontSize: "15px" });
     }
     
     this.container1 = this.add.container(config.width/3, config.height/1.15);
@@ -246,10 +246,10 @@ class Home extends Phaser.Scene {
     this.blur.setDepth(3);
     this.talkScreen.setDepth(3);
     this.winText = this.add.text(300, 410, 
-      "You Win! \n\n You planted the native plant and started the town on its sustainability journey! \n\n",
+      "You Win! \n\nYou planted the native plant and started the town on its sustainability journey! \n\n",
       {fill:"#995f40", fontSize:"20px"});
     this.loseText = this.add.text(290, 410, 
-      "Try again next time! \n\n You planted the invasive plant :( \n\n",
+      "Try again next time! \n\nYou planted the invasive plant :( \n\n",
       {fill:"#995f40", align: "center", fontSize:"20px"});
     this.restartButton = this.add.text(290, 500, "PLAY AGAIN", 
     {fill:"#995f40", align: "center", fontSize:"20px"});
@@ -351,6 +351,9 @@ class Home extends Phaser.Scene {
     for(var i = 0; i < app.itemArr.length; i++){
       this.highlightItem(app.itemArr[i]);
     }
+    for(var i = 0; i < app.inventoryArr.length; i++){
+      this.highlightInv(app.inventoryArr[i]);
+    }
   }
 
   highlightItem(item) {
@@ -363,9 +366,18 @@ class Home extends Phaser.Scene {
     })
   }
 
+  highlightInv(item){
+    if(app.currentItem === item){
+      app.currentItem.alpha = 0.5;
+    }
+    else if(app.currentItem !== null){
+      app.currentItem.alpha = 1;
+    }
+  }
+
   chosenItem(item) {
     app.currentItem = item;
- 
+    console.log("currentitem", app.currentItem);
   }
 
   addItemtoInventory(object) {
