@@ -332,7 +332,7 @@ class Town extends Phaser.Scene {
             this.dropSeeds("sunflower");
             this.t2.setVisible(true);
           }
-          else if(person.id.talkCount === 6 && person.id.name === "Darren"){
+          else if(person.id.talkCount === 5 && person.id.name === "Darren"){
             this.wateringCan.setVisible(true);
           }
         }
@@ -434,7 +434,7 @@ class Town extends Phaser.Scene {
           this.susbutton.setVisible(false);
           this.xbutton.setVisible(false);
           this.convo.setVisible(false);
-          var text = "Sustainability is based on a simple principle:\n Everything that we need for our survival and well-being\n depends, either directly or indirectly, on our natural environment.\n To pursue sustainability is to create and maintain the conditions\n under which humans and nature can exist in productive\n harmony to support present and future generations."; 
+          var text = "Sustainability means meeting our own needs without compromising \n the ability of future generations to meet theirown needs."; 
           this.convo = this.add.text(300, 410, text, {
             font: "20px Courier",
             fill: "0x995f40",
