@@ -449,7 +449,7 @@ class Town extends Phaser.Scene {
           this.susbutton.setVisible(false);
           this.xbutton.setVisible(false);
           this.convo.setVisible(false);
-          var text = "\n\n Sustainability means meeting our own needs without compromising \n the ability of future generations to meet theirown needs."; 
+          var text = "\n\n Sustainability means meeting our own needs without compromising \n the ability of future generations to meet their own needs."; 
           this.convo = this.add.text(300, 410, text, {
             font: "20px Courier",
             fill: "0x995f40",
