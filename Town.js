@@ -46,7 +46,7 @@ class Town extends Phaser.Scene {
       this.groundLayer.scale = 0.75;
       this.topLayer = this.map.createLayer("tree", this.tileset, 0, 0);
       this.topLayer.scale = 0.75;
-      this.topLayer.setDepth(10);
+      this.topLayer.setDepth(2);
       this.physics.world.setBoundsCollision();
       this.physics.add.collider(this.player, this.groundLayer);
       this.groundLayer.setCollisionByProperty({ collides: true });
@@ -84,6 +84,7 @@ class Town extends Phaser.Scene {
     this.wateringCan.setScale(0.3);
     this.wateringCan.setInteractive();
     this.wateringCan.setVisible(false);  
+    app.itemArr.push(this.wateringCan);
 
     this.container1 = this.add.container(config.width/3, config.height/1.15);
     this.container1.setDepth(2);
@@ -113,6 +114,8 @@ class Town extends Phaser.Scene {
     this.talkScreen.text = '';
     this.talkScreen.setVisible(false);
     this.blur.setVisible(false);
+    this.blur.setDepth(3);
+    this.talkScreen.setDepth(4);
 
     // popup for library
     this.libblur = this.add.rectangle(0,0,config.width*2, config.height*2, 0x000000, 0.5);
@@ -127,6 +130,7 @@ class Town extends Phaser.Scene {
     this.checkbutton.setScale(5,4);
     this.checkbutton.setInteractive();
     this.checkbutton.setVisible(false);
+    this.checkbutton.setDepth(6);
 
     //button for Library Door
     this.doorbutton = this.add.image(222, 210, 'door_button');
@@ -139,22 +143,26 @@ class Town extends Phaser.Scene {
     this.susbutton.setScale(5,4);
     this.susbutton.setInteractive();
     this.susbutton.setVisible(false);
+    this.susbutton.setDepth(6);
 
     this.sunbutton = this.add.image(750, 550, 'sunflower_button');
     this.sunbutton.setScale(5,4);
     this.sunbutton.setInteractive();
     this.sunbutton.setVisible(false);
+    this.sunbutton.setDepth(6);
 
     this.ivybutton = this.add.image(1100, 550, 'ivy_button');
     this.ivybutton.setScale(5,4);
     this.ivybutton.setInteractive();
     this.ivybutton.setVisible(false); 
+    this.ivybutton.setDepth(6);
 
     //button for exiting speech bubble
     this.xbutton = this.add.image(1200, 450, 'x_button');
     this.xbutton.setScale(5,4);
     this.xbutton.setInteractive();
     this.xbutton.setVisible(false);
+    this.xbutton.setDepth(6);
     
     this.canTalk = false;
     this.personTalking = null;
@@ -314,6 +322,7 @@ class Town extends Phaser.Scene {
             fill: "0x995f40",
             align: "left"}
           );
+          this.convo.setDepth(5);
         }
         else{
           console.log('else');
@@ -326,6 +335,7 @@ class Town extends Phaser.Scene {
             fill: "0x995f40",
             align: "left"}
           );
+          this.convo.setDepth(5);
           this.convo.setVisible(true);
           if(person.id.talkCount === 3 && person.id.name === "Glenn"){
             this.dropSeeds("english_ivy");
@@ -363,9 +373,11 @@ class Town extends Phaser.Scene {
 
     libraryEntered(){
       this.beenToLib = true;
-      var text = "Welcome to the library!\n\n Click on the subject you want to learn about";
+      var text = " Welcome to the library!\n\n Click on the subject you want to learn about";
       if(!!text){
         this.libScreen.setVisible(true);
+        this.libblur.setDepth(3);
+        this.libScreen.setDepth(4);
         this.libblur.setVisible(true);
         this.sunbutton.setVisible(true);
         this.ivybutton.setVisible(true);
@@ -377,6 +389,7 @@ class Town extends Phaser.Scene {
           align: "left"}
         );
         this.convo.setVisible(true);
+        this.convo.setDepth(5);
       }
     }
 
@@ -390,13 +403,14 @@ class Town extends Phaser.Scene {
       this.xbutton.setVisible(false);
       this.convo.setVisible(false);
 
-      var text = "The Giant Sunflower also known as Helianthus giganteus\n is a native plant and blooms in summer.\n It attracts pollinators like bees."
+      var text = "\n\n The Giant Sunflower also known as Helianthus giganteus\n is a native plant and blooms in summer.\n It attracts pollinators like bees."
       this.convo = this.add.text(300, 410, text, {
         font: "20px Courier",
         fill: "0x995f40",
         align: "left"}
       );
       this.convo.setVisible(true);
+      this.convo.setDepth(5);
       this.xbutton.setVisible(true);
       this.libScreen.setVisible(true);
       this.libblur.setVisible(true);
@@ -412,13 +426,14 @@ class Town extends Phaser.Scene {
         this.xbutton.setVisible(false);
         this.convo.setVisible(false);
 
-        var text = "English Ivy also known as Hedera Helix\n is a vining plant that is not native to this region.\n This plant is actually invasive.";
+        var text = "\n\n English Ivy also known as Hedera Helix\n is a vining plant that is not native to this region.\n This plant is actually invasive.";
 
         this.convo = this.add.text(300, 410, text, {
           font: "20px Courier",
           fill: "0x995f40",
           align: "left"}
         );
+        this.convo.setDepth(5);
         this.convo.setVisible(true);
         this.xbutton.setVisible(true);
         this.libScreen.setVisible(true);
@@ -434,12 +449,13 @@ class Town extends Phaser.Scene {
           this.susbutton.setVisible(false);
           this.xbutton.setVisible(false);
           this.convo.setVisible(false);
-          var text = "Sustainability means meeting our own needs without compromising \n the ability of future generations to meet theirown needs."; 
+          var text = "\n\n Sustainability means meeting our own needs without compromising \n the ability of future generations to meet theirown needs."; 
           this.convo = this.add.text(300, 410, text, {
             font: "20px Courier",
             fill: "0x995f40",
             align: "left"}
           );
+          this.convo.setDepth(5);
 
       this.convo.setVisible(true);
       this.xbutton.setVisible(true);
